@@ -15,6 +15,7 @@ public class GuardarCargar {
 
     private File ruta;
     private File archivo;
+    public static final String ARCHIVO_CONF = "configuracion.conf";
     public static final String EXTENSION = "prj";
     private static final String RUTA = "./proyectos/";
 
@@ -44,6 +45,10 @@ public class GuardarCargar {
         boolean todoCorrecto = true;
         archivo = new File(ruta, proyecto.getNombreArchivo() + "." + EXTENSION);
 
+        // Pedirle al proyecto que marque la fecha en que se modifico.
+        proyecto.marcarFechaModificacion();
+
+        // Guardar el objeto en un archivo.
         // Al ponerlo asi se cierran automaticamente los escritores.
         try (FileOutputStream archivoSalida = new FileOutputStream(archivo);
                 ObjectOutputStream escritorObj = new ObjectOutputStream(archivoSalida);) {
@@ -95,6 +100,40 @@ public class GuardarCargar {
             }
         }
         return proyectos;
+    }
+
+    public boolean guardarConfiguracion(Configuracion datos) {
+        boolean todoCorrecto = true;
+        archivo = new File(ARCHIVO_CONF);
+
+        // Guardar el objeto en un archivo.
+        // Al ponerlo asi se cierran automaticamente los escritores.
+        try (FileOutputStream archivoSalida = new FileOutputStream(archivo);
+                ObjectOutputStream escritorObj = new ObjectOutputStream(archivoSalida);) {
+            escritorObj.writeObject(datos);
+            archivoSalida.close();
+            escritorObj.close();
+        } catch (Exception ex) {
+            todoCorrecto = false;
+        }
+
+        return todoCorrecto;
+    }
+
+    public Configuracion cargarConfiguracion() {
+        Configuracion datos;
+        archivo = new File(ARCHIVO_CONF);
+
+        try (FileInputStream archivoEntrada = new FileInputStream(archivo);
+                ObjectInputStream lectorObj = new ObjectInputStream(archivoEntrada);) {
+            datos = (Configuracion) lectorObj.readObject();
+            archivoEntrada.close();
+            lectorObj.close();
+        } catch (Exception ex) {
+            datos = null;
+        }
+
+        return datos;
     }
 
 }
