@@ -4,6 +4,7 @@ import controlador.ControladorPrincipal;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,7 @@ public class VistaPrincipal extends JFrame {
 
     private JButton btnNuevo, btnAbrir, btnEliminar, btnAcercaDe;
 
-    private JLabel lblSelecciona, lblInfoProyecto, lblTituloInfo, lblNombreArchivoInfo, lblFechaCreacionInfo, lblEstadoInfo, lblTitulo, lblNombreArchivo, lblFechaCreacion, lblEstado;
+    private JLabel lblSelecciona, lblTituloInfo, lblNombreArchivoInfo, lblFechaCreacionInfo, lblFechaModificacionInfo, lblEstadoInfo, lblTitulo, lblNombreArchivo, lblFechaCreacion, lblFechaModificacion, lblEstado;
     private JLabel lblTareasInfo, lblProcesosInfo, lblHechosInfo;
     private JLabel lblTareas, lblProcesos, lblHechos;
 
@@ -49,6 +50,12 @@ public class VistaPrincipal extends JFrame {
     private final ImageIcon imgInfo = new ImageIcon(getClass().getResource("/recursos/info.png"));
     private final ImageIcon imgOk = new ImageIcon(getClass().getResource("/recursos/ok.png"));
 
+    private final Font fuente = new Font("Default", Font.PLAIN, 15);
+    private final Font fuenteNegrita = new Font("Default", Font.BOLD, 15);
+    private final Font fuenteGrande = new Font("Default", Font.BOLD, 30);
+
+    private final Color colorTarea = new Color(242, 181, 57);
+    private final Color colorTareaBack = new Color(254, 239, 208);
     private final Color colorProceso = new Color(145, 185, 243);
     private final Color colorProcesoBack = new Color(227, 238, 254);
     private final Color colorHecho = new Color(139, 214, 1);
@@ -69,7 +76,7 @@ public class VistaPrincipal extends JFrame {
         // Propiedades de la ventana.
         this.setResizable(false);
         this.setTitle("Control de proyectos");
-        this.definirTamanioVentana(200, 370);
+        this.definirTamanioVentana(220, 420);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -92,17 +99,18 @@ public class VistaPrincipal extends JFrame {
         btnAcercaDe = new JButton();
 
         lblSelecciona = new JLabel("Selecciona un proyecto");
-        lblInfoProyecto = new JLabel("Vista previa", SwingConstants.CENTER);
         lblTituloInfo = new JLabel("Título");
         lblNombreArchivoInfo = new JLabel("Nombre de archivo");
         lblFechaCreacionInfo = new JLabel("Fecha de creación");
+        lblFechaModificacionInfo = new JLabel("Última modificación");
         lblEstadoInfo = new JLabel("Estado");
         lblTitulo = new JLabel("#");
         lblNombreArchivo = new JLabel("#");
         lblFechaCreacion = new JLabel("#");
+        lblFechaModificacion = new JLabel("#");
         lblEstado = new JLabel("#");
         lblTareasInfo = new JLabel("Tareas", SwingConstants.CENTER);
-        lblProcesosInfo = new JLabel("Procesos", SwingConstants.CENTER);
+        lblProcesosInfo = new JLabel("En proceso", SwingConstants.CENTER);
         lblHechosInfo = new JLabel("Hechos", SwingConstants.CENTER);
         lblTareas = new JLabel("--", SwingConstants.CENTER);
         lblProcesos = new JLabel("--", SwingConstants.CENTER);
@@ -115,9 +123,9 @@ public class VistaPrincipal extends JFrame {
         pnlNorte1.setLayout(new BorderLayout());
         pnlNorte2.setLayout(new GridLayout(1, 3));
         pnlCentral.setLayout(new BorderLayout());
-        pnlSur.setLayout(new GridLayout(2, 3));
-        pnlCentroIzq.setLayout(new GridLayout(4, 1));
-        pnlCentroCentral.setLayout(new GridLayout(4, 1));
+        pnlSur.setLayout(new GridLayout(2, 3, 25, 0));
+        pnlCentroIzq.setLayout(new GridLayout(5, 1));
+        pnlCentroCentral.setLayout(new GridLayout(5, 1));
     }
 
     private void colocarElementos() {
@@ -134,7 +142,6 @@ public class VistaPrincipal extends JFrame {
         pnlNorte2.add(btnEliminar);
 
         pnlGlobal.add(pnlCentral, BorderLayout.CENTER);
-        pnlCentral.add(lblInfoProyecto, BorderLayout.NORTH);
 
         pnlCentral.add(pnlCentroIzq, BorderLayout.WEST);
         pnlCentral.add(pnlCentroCentral, BorderLayout.CENTER);
@@ -142,11 +149,13 @@ public class VistaPrincipal extends JFrame {
         pnlCentroIzq.add(lblTituloInfo);
         pnlCentroIzq.add(lblNombreArchivoInfo);
         pnlCentroIzq.add(lblFechaCreacionInfo);
+        pnlCentroIzq.add(lblFechaModificacionInfo);
         pnlCentroIzq.add(lblEstadoInfo);
 
         pnlCentroCentral.add(lblTitulo);
         pnlCentroCentral.add(lblNombreArchivo);
         pnlCentroCentral.add(lblFechaCreacion);
+        pnlCentroCentral.add(lblFechaModificacion);
         pnlCentroCentral.add(lblEstado);
 
         pnlGlobal.add(pnlSur, BorderLayout.SOUTH);
@@ -159,10 +168,11 @@ public class VistaPrincipal extends JFrame {
     }
 
     private void definirEstilos() {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/logo.png")));
+
         btnNuevo.setIcon(imgNuevo);
         btnAbrir.setIcon(imgAbrir);
         btnEliminar.setIcon(imgPapelera);
-        lblInfoProyecto.setIcon(imgOk);
         lblTareasInfo.setIcon(imgTarea);
         lblProcesosInfo.setIcon(imgProceso);
         lblHechosInfo.setIcon(imgHecho);
@@ -173,21 +183,50 @@ public class VistaPrincipal extends JFrame {
         btnEliminar.setFocusPainted(false);
         btnAcercaDe.setFocusPainted(false);
 
+        lblSelecciona.setFont(fuente);
+        cmbProyectos.setFont(fuenteNegrita);
+        btnNuevo.setFont(fuenteNegrita);
+        btnAbrir.setFont(fuenteNegrita);
+        btnEliminar.setFont(fuenteNegrita);
+        lblTituloInfo.setFont(fuenteNegrita);
+        lblNombreArchivoInfo.setFont(fuenteNegrita);
+        lblFechaCreacionInfo.setFont(fuenteNegrita);
+        lblFechaModificacionInfo.setFont(fuenteNegrita);
+        lblEstadoInfo.setFont(fuenteNegrita);
+        lblTareasInfo.setFont(fuenteNegrita);
+        lblProcesosInfo.setFont(fuenteNegrita);
+        lblHechosInfo.setFont(fuenteNegrita);
+
+        lblTitulo.setFont(fuente);
+        lblNombreArchivo.setFont(fuente);
+        lblFechaCreacion.setFont(fuente);
+        lblFechaModificacion.setFont(fuente);
+        lblEstado.setFont(fuente);
+        lblTareas.setFont(fuenteGrande);
+        lblProcesos.setFont(fuenteGrande);
+        lblHechos.setFont(fuenteGrande);
+
         pnlGlobal.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        lblSelecciona.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 5));
+        lblSelecciona.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 10));
         pnlNorte1.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
         pnlNorte.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
-        pnlCentral.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        pnlCentral.setBorder(BorderFactory.createEmptyBorder(10, 5, 5, 5));
         pnlSur.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pnlCentroIzq.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
 
-        pnlCentral.setBackground(colorProcesoBack);
-        pnlSur.setBackground(colorProcesoBack);
+        lblTareas.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, colorTarea));
+        lblProcesos.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, colorProceso));
+        lblHechos.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, colorHecho));
+
         pnlGlobal.setBackground(colorBack);
+        cmbProyectos.setBackground(colorProcesoBack);
+        btnAcercaDe.setBackground(colorProcesoBack);
         btnNuevo.setBackground(colorBack);
         btnAbrir.setBackground(colorHechoBack);
         btnEliminar.setBackground(colorRemove);
 
+        pnlCentral.setOpaque(false);
+        pnlSur.setOpaque(false);
         pnlNorte.setOpaque(false);
         pnlNorte1.setOpaque(false);
         pnlNorte2.setOpaque(false);
@@ -239,7 +278,7 @@ public class VistaPrincipal extends JFrame {
                 cmbProyectos.addItem(proyecto);
             }
         } else {
-            setInfoProyecto("#", "#", "#", "#", -1, -1, -1);
+            setInfoProyecto("#", "#", "#", "#", "#", -1, -1, -1);
         }
     }
 
@@ -247,12 +286,14 @@ public class VistaPrincipal extends JFrame {
             String nombreProyecto,
             String nombreArchivo,
             String fechaCreacion,
+            String fechaModificacion,
             String estado,
             int tareas, int procesos, int hechos) {
 
         lblTitulo.setText(nombreProyecto);
         lblNombreArchivo.setText(nombreArchivo);
         lblFechaCreacion.setText(fechaCreacion);
+        lblFechaModificacion.setText(fechaModificacion);
         lblEstado.setText(estado);
         lblTareas.setText(tareas == -1 ? "--" : Integer.toString(tareas));
         lblProcesos.setText(procesos == -1 ? "--" : Integer.toString(procesos));
@@ -279,6 +320,10 @@ public class VistaPrincipal extends JFrame {
             }
             controlador.crearProyectoNuevo(respuesta);
         }
+    }
+
+    public void setElementoSeleccionado(int indice) {
+        cmbProyectos.setSelectedIndex(indice);
     }
 
     public void mostrarMensaje(String mensaje, boolean esError) {
