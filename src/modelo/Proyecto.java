@@ -15,6 +15,7 @@ public class Proyecto implements Serializable {
     // ########################## CAMPOS ##########################
     private String nombreProyecto;
     private String nombreArchivo;
+    private String fechaUltimaModificacion;
     private final String fechaCreacion;
     private final ArrayList<String> coleccionTareas;
     private final ArrayList<String> coleccionProcesos;
@@ -24,7 +25,8 @@ public class Proyecto implements Serializable {
     public Proyecto(String nombreProyecto) {
         this.nombreProyecto = nombreProyecto;
         this.nombreArchivo = generarNombreArchivo(nombreProyecto);
-        this.fechaCreacion = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+        this.fechaCreacion = getFechaActual();
+        this.fechaUltimaModificacion = "";
         coleccionTareas = new ArrayList();
         coleccionProcesos = new ArrayList();
         coleccionHechos = new ArrayList();
@@ -114,6 +116,10 @@ public class Proyecto implements Serializable {
         return nombreArchivo;
     }
 
+    public String getFechaModificacion() {
+        return fechaUltimaModificacion;
+    }
+
     public String getFechaCreacion() {
         return fechaCreacion;
     }
@@ -130,11 +136,20 @@ public class Proyecto implements Serializable {
         return nombreArchivo;
     }
 
+    public void marcarFechaModificacion() {
+        this.fechaUltimaModificacion = getFechaActual();
+    }
+
+    private static String getFechaActual() {
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+    }
+
     @Override
     public String toString() {
         return "Título: " + getNombreProyecto() + "\n"
                 + "Nombre archivo: " + getNombreArchivo() + "\n"
                 + "Fecha de creación: " + getFechaCreacion() + "\n"
+                + "Fecha de modificacion: " + getFechaModificacion() + "\n"
                 + "Estado: " + getEstado() + "\n"
                 + "Tareas " + getNumTareas() + " / Procesos " + getNumProcesos() + " / Hechos " + getNumHechos();
     }

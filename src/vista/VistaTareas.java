@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
@@ -47,7 +49,8 @@ public class VistaTareas extends JFrame {
 
     private int indiceTarea, indiceProceso, indiceHecho;
 
-    private final Font fuente = new Font("Default", 1, 15);
+    private final Font fuenteNegrita = new Font("Default", Font.BOLD, 15);
+
     private final Color colorTarea = new Color(242, 181, 57);
     private final Color colorTareaBack = new Color(254, 239, 208);
     private final Color colorProceso = new Color(145, 185, 243);
@@ -81,7 +84,7 @@ public class VistaTareas extends JFrame {
 
         // Propiedades de la ventana.
         this.setResizable(true);
-        this.setTitle("Control de proyecto");
+        this.setTitle("Gestión de tareas");
         this.definirTamanioVentana(450, 700);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -210,6 +213,8 @@ public class VistaTareas extends JFrame {
 
     // Define los estilos de todos los elementos.
     private void definirEstilos() {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/logo.png")));
+
         pnlGlobal.setBackground(colorBack);
         pnlTareas.setBackground(colorTarea);
         pnlProceso.setBackground(colorProceso);
@@ -269,21 +274,21 @@ public class VistaTareas extends JFrame {
         lblTProceso.setBorder(BorderFactory.createEmptyBorder(2, 5, 5, 5));
         lblTHecho.setBorder(BorderFactory.createEmptyBorder(2, 5, 5, 5));
 
-        lblTitulo.setFont(fuente);
-        listaTarea.setFont(fuente);
-        listaProceso.setFont(fuente);
-        listaHecho.setFont(fuente);
+        lblTitulo.setFont(fuenteNegrita);
+        listaTarea.setFont(fuenteNegrita);
+        listaProceso.setFont(fuenteNegrita);
+        listaHecho.setFont(fuenteNegrita);
 
         listaTarea.setSelectionBackground(colorTarea);
         listaProceso.setSelectionBackground(colorProceso);
         listaHecho.setSelectionBackground(colorHecho);
 
-        txtTarea.setFont(fuente);
-        txtProceso.setFont(fuente);
-        txtHecho.setFont(fuente);
-        lblTTarea.setFont(fuente);
-        lblTProceso.setFont(fuente);
-        lblTHecho.setFont(fuente);
+        txtTarea.setFont(fuenteNegrita);
+        txtProceso.setFont(fuenteNegrita);
+        txtHecho.setFont(fuenteNegrita);
+        lblTTarea.setFont(fuenteNegrita);
+        lblTProceso.setFont(fuenteNegrita);
+        lblTHecho.setFont(fuenteNegrita);
 
         lblTTarea.setIcon(imgTarea);
         lblTProceso.setIcon(imgProceso);

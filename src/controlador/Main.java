@@ -1,9 +1,5 @@
 package controlador;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import vista.VistaPrincipal;
-
 /**
  * Clase principal que ejecuta la aplicacion. Esta aplicacion permite gestionar
  * listas de tareas de forma simple. Trabaja con archivos ".prj" almacenados en
