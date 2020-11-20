@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -21,6 +23,15 @@ public class GuardarCargar {
 
     public GuardarCargar() {
         this.ruta = new File(RUTA);
+
+        // Si la carpeta no existe la crea.
+        if (!ruta.exists()) {
+            try {
+                Files.createDirectories(Paths.get(RUTA));
+            } catch (Exception ex) {
+                System.out.println("No se ha podido crear la carpeta.");
+            }
+        }
     }
 
     // Si no existe el proyecto crea uno nuevo.
