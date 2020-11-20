@@ -40,7 +40,7 @@ public final class VistaAcerca extends Vista {
 
         // Propiedades de la ventana.
         super.setResizable(false);
-        super.setTitle("Acerca de");
+        super.setTitle("Task Man");
         super.definirTamanioVentana(320, 300);
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -126,7 +126,7 @@ public final class VistaAcerca extends Vista {
                 }
             }
         });
-        
+
         // Al cerrar esta ventana (JFrame).
         this.addWindowListener(new WindowAdapter() {
             @Override
