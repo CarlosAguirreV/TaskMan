@@ -4,31 +4,38 @@ import java.util.ArrayList;
 import modelo.Configuracion;
 import modelo.GuardarCargar;
 import modelo.Proyecto;
+import vista.VistaAcerca;
 import vista.VistaPrincipal;
 
 /**
+ * Clase que controla los proyectos. Vista asociada: VistaPrincipal.
  *
  * @author Carlos Aguirre
  */
-public class ControladorPrincipal {
+public final class ControladorPrincipal {
 
+    // ########################## CAMPOS ##########################
     private final GuardarCargar cargarGuardar;
     private final VistaPrincipal vistaPrincipal;
+    private final VistaAcerca vistaAcerca;
     private ArrayList<Proyecto> coleccionProyectos;
     private Proyecto proyectoActual;
     private Configuracion configuracion;
 
+    // ########################## CONSTRUCTOR ##########################
     public ControladorPrincipal(String version) {
         cargarGuardar = new GuardarCargar();
         vistaPrincipal = new VistaPrincipal(this);
+        vistaAcerca = new VistaAcerca(this);
 
         cargarConfiguracion();
         mostrarVentanaPrincipal();
     }
 
-    public void proyectoSeleccionado(int indice) {
-        if (indice != -1) {
-            proyectoActual = coleccionProyectos.get(indice);
+    // ########################## METODOS ##########################
+    public void mostrarInfoProyectoSeleccionado(int indiceLista) {
+        if (indiceLista != -1) {
+            proyectoActual = coleccionProyectos.get(indiceLista);
 
             vistaPrincipal.setInfoProyecto(
                     proyectoActual.getNombreProyecto(),
@@ -150,4 +157,8 @@ public class ControladorPrincipal {
         return existe;
     }
 
+    public void mostrarVistaAcerca(boolean mostrar) {
+        vistaAcerca.setVisible(mostrar);
+        vistaPrincipal.setVisible(!mostrar);
+    }
 }

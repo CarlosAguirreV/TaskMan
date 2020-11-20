@@ -2,25 +2,17 @@ package vista;
 
 import controlador.ControlTareas;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -29,50 +21,35 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 /**
+ * Vista que permite gestionar las tareas. Esta clase no puede ser heredada
+ * (final).
  *
  * @author Carlos Aguirre
  */
-public class VistaTareas extends JFrame {
+public final class VistaTareas extends Vista {
 
-    private JPanel pnlGlobal, pnlNorte, pnlCentral, pnlTareas, pnlProceso, pnlHecho;
-    private JPanel pnlInfTarea, pnlInfProceso, pnlInfHecho;
-    private JPanel pnlControlTarea, pnlControlProceso, pnlControlHecho;
+    // ########################## CAMPOS ##########################
+    private JPanel pnlGlobal, pnlNorte, pnlCentral, pnlTareas, pnlProceso,
+            pnlHecho;
+    private JPanel pnlInfTarea, pnlInfProceso, pnlInfHecho,
+            pnlControlTarea, pnlControlProceso, pnlControlHecho,
+            pnlTNTarea, pnlTNProceso, pnlTNHecho;
+    private JScrollPane pnlScrTareas, pnlScrProceso, pnlScrHecho;
     private JLabel lblTTarea, lblTProceso, lblTHecho, lblTitulo;
     private JList<String> listaTarea, listaProceso, listaHecho;
     private DefaultListModel<String> lmTareas, lmProceso, lmHecho;
-    private JScrollPane pnlScrTareas, pnlScrProceso, pnlScrHecho;
     private JTextField txtTarea, txtProceso, txtHecho;
-    private JButton btnInicio, btnConfig, btnTareaOk, btnProcesoOk, btnHechoOk;
-    private JButton btnDchaTarea, btnRemoveTarea;
-    private JButton btnIzqProceso, btnRemoveProceso, btnDchaProceso;
-    private JButton btnIzqHecho, btnRemoveHecho;
+    private JButton btnInicio, btnEditar, btnTareaOk, btnProcesoOk, btnHechoOk,
+            btnDchaTarea, btnRemoveTarea, btnIzqProceso, btnRemoveProceso,
+            btnDchaProceso, btnIzqHecho, btnRemoveHecho,
+            btnTareaArriba, btnTareaAbajo,
+            btnProcesoArriba, btnProcesoAbajo,
+            btnHechoArriba, btnHechoAbajo;
+    private final ControlTareas controlador;
 
-    private int indiceTarea, indiceProceso, indiceHecho;
-
-    private final Font fuenteNegrita = new Font("Default", Font.BOLD, 15);
-
-    private final Color colorTarea = new Color(242, 181, 57);
-    private final Color colorTareaBack = new Color(254, 239, 208);
-    private final Color colorProceso = new Color(145, 185, 243);
-    private final Color colorProcesoBack = new Color(227, 238, 254);
-    private final Color colorHecho = new Color(139, 214, 1);
-    private final Color colorHechoBack = new Color(227, 254, 234);
-    private final Color colorRemove = new Color(254, 229, 238);
-    private final Color colorBack = new Color(254, 249, 251);
-
-    private final ImageIcon imgInicio = new ImageIcon(getClass().getResource("/recursos/inicio.png"));
-    private final ImageIcon imgConfig = new ImageIcon(getClass().getResource("/recursos/config.png"));
-    private final ImageIcon imgDcha = new ImageIcon(getClass().getResource("/recursos/dcha.png"));
-    private final ImageIcon imgIzq = new ImageIcon(getClass().getResource("/recursos/izq.png"));
-    private final ImageIcon imgOk = new ImageIcon(getClass().getResource("/recursos/ok.png"));
-    private final ImageIcon imgPapelera = new ImageIcon(getClass().getResource("/recursos/papelera.png"));
-    private final ImageIcon imgTarea = new ImageIcon(getClass().getResource("/recursos/tarea.png"));
-    private final ImageIcon imgProceso = new ImageIcon(getClass().getResource("/recursos/proceso.png"));
-    private final ImageIcon imgHecho = new ImageIcon(getClass().getResource("/recursos/hecho.png"));
-
-    private ControlTareas controlador;
-
+    // ########################## CONSTRUCTOR ##########################
     public VistaTareas(ControlTareas controlador, String nombreProyecto) {
+        // Definir el controlador.
         this.controlador = controlador;
 
         // Pasos para la creacion de la ventana.
@@ -83,17 +60,18 @@ public class VistaTareas extends JFrame {
         this.eventos();
 
         // Propiedades de la ventana.
-        this.setResizable(true);
-        this.setTitle("Gestión de tareas");
-        this.definirTamanioVentana(450, 700);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        lblTitulo.setText(nombreProyecto);
-        this.setVisible(true);
+        super.setResizable(true);
+        super.setTitle("Gestión de tareas");
+        super.definirTamanioVentana(450, 700);
+        super.setLocationRelativeTo(null);
+        super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.lblTitulo.setText(nombreProyecto);
+        super.setVisible(true);
     }
 
-    // Crea todos los elementos de la ventana.
-    private void crearElementos() {
+    // ########################## METODOS SOBRESCRITOS ##########################
+    @Override
+    protected void crearElementos() {
         pnlGlobal = new JPanel();
         pnlNorte = new JPanel();
         pnlCentral = new JPanel();
@@ -106,9 +84,9 @@ public class VistaTareas extends JFrame {
         pnlInfHecho = new JPanel();
 
         lblTitulo = new JLabel("#", SwingConstants.CENTER);
-        lblTTarea = new JLabel("Lista de tareas", SwingConstants.CENTER);
-        lblTProceso = new JLabel("En proceso", SwingConstants.CENTER);
-        lblTHecho = new JLabel("Hechos", SwingConstants.CENTER);
+        lblTTarea = new JLabel("#", SwingConstants.CENTER);
+        lblTProceso = new JLabel("#", SwingConstants.CENTER);
+        lblTHecho = new JLabel("#", SwingConstants.CENTER);
 
         lmTareas = new DefaultListModel();
         lmProceso = new DefaultListModel();
@@ -127,7 +105,7 @@ public class VistaTareas extends JFrame {
         txtHecho = new JTextField();
 
         btnInicio = new JButton(imgInicio);
-        btnConfig = new JButton(imgConfig);
+        btnEditar = new JButton(imgEditar);
         btnTareaOk = new JButton(imgOk);
         btnProcesoOk = new JButton(imgOk);
         btnHechoOk = new JButton(imgOk);
@@ -145,10 +123,20 @@ public class VistaTareas extends JFrame {
 
         btnIzqHecho = new JButton(imgIzq);
         btnRemoveHecho = new JButton(imgPapelera);
+
+        pnlTNTarea = new JPanel();
+        pnlTNProceso = new JPanel();
+        pnlTNHecho = new JPanel();
+        btnTareaArriba = new JButton(imgArriba);
+        btnTareaAbajo = new JButton(imgAbajo);
+        btnProcesoArriba = new JButton(imgArriba);
+        btnProcesoAbajo = new JButton(imgAbajo);
+        btnHechoArriba = new JButton(imgArriba);
+        btnHechoAbajo = new JButton(imgAbajo);
     }
 
-    // Define las distribuciones que ha de tener cada panel.
-    private void crearDistribucion() {
+    @Override
+    protected void crearDistribucion() {
         pnlGlobal.setLayout(new BorderLayout());
         pnlNorte.setLayout(new BorderLayout());
         pnlCentral.setLayout(new GridLayout(1, 3, 7, 0));
@@ -163,28 +151,50 @@ public class VistaTareas extends JFrame {
         pnlControlTarea.setLayout(new GridLayout(1, 3));
         pnlControlProceso.setLayout(new GridLayout(1, 3));
         pnlControlHecho.setLayout(new GridLayout(1, 3));
+
+        pnlTNTarea.setLayout(new BorderLayout());
+        pnlTNProceso.setLayout(new BorderLayout());
+        pnlTNHecho.setLayout(new BorderLayout());
     }
 
-    // Coloca cada elemento en su respectivo panel.
-    private void colocarElementos() {
-        this.getContentPane().add(pnlGlobal);
+    @Override
+    protected void colocarElementos() {
+        super.getContentPane().add(pnlGlobal);
+
         pnlGlobal.add(pnlNorte, BorderLayout.NORTH);
         pnlGlobal.add(pnlCentral, BorderLayout.CENTER);
+
         pnlNorte.add(lblTitulo, BorderLayout.CENTER);
         pnlNorte.add(btnInicio, BorderLayout.WEST);
-        pnlNorte.add(btnConfig, BorderLayout.EAST);
+        pnlNorte.add(btnEditar, BorderLayout.EAST);
+
         pnlCentral.add(pnlTareas);
         pnlCentral.add(pnlProceso);
         pnlCentral.add(pnlHecho);
-        pnlTareas.add(lblTTarea, BorderLayout.NORTH);
+
+        pnlTareas.add(pnlTNTarea, BorderLayout.NORTH);
         pnlTareas.add(pnlScrTareas, BorderLayout.CENTER);
         pnlTareas.add(pnlInfTarea, BorderLayout.SOUTH);
-        pnlProceso.add(lblTProceso, BorderLayout.NORTH);
+
+        pnlTNTarea.add(lblTTarea, BorderLayout.CENTER);
+        pnlTNTarea.add(btnTareaArriba, BorderLayout.WEST);
+        pnlTNTarea.add(btnTareaAbajo, BorderLayout.EAST);
+
+        pnlProceso.add(pnlTNProceso, BorderLayout.NORTH);
         pnlProceso.add(pnlScrProceso, BorderLayout.CENTER);
         pnlProceso.add(pnlInfProceso, BorderLayout.SOUTH);
-        pnlHecho.add(lblTHecho, BorderLayout.NORTH);
+
+        pnlTNProceso.add(lblTProceso, BorderLayout.CENTER);
+        pnlTNProceso.add(btnProcesoArriba, BorderLayout.WEST);
+        pnlTNProceso.add(btnProcesoAbajo, BorderLayout.EAST);
+
+        pnlHecho.add(pnlTNHecho, BorderLayout.NORTH);
         pnlHecho.add(pnlScrHecho, BorderLayout.CENTER);
         pnlHecho.add(pnlInfHecho, BorderLayout.SOUTH);
+
+        pnlTNHecho.add(lblTHecho, BorderLayout.CENTER);
+        pnlTNHecho.add(btnHechoArriba, BorderLayout.WEST);
+        pnlTNHecho.add(btnHechoAbajo, BorderLayout.EAST);
 
         pnlInfTarea.add(txtTarea, BorderLayout.CENTER);
         pnlInfTarea.add(btnTareaOk, BorderLayout.EAST);
@@ -211,52 +221,44 @@ public class VistaTareas extends JFrame {
         pnlControlHecho.add(new JLabel());
     }
 
-    // Define los estilos de todos los elementos.
-    private void definirEstilos() {
+    @Override
+    protected void definirEstilos() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/logo.png")));
 
-        pnlGlobal.setBackground(colorBack);
-        pnlTareas.setBackground(colorTarea);
-        pnlProceso.setBackground(colorProceso);
-        pnlHecho.setBackground(colorHecho);
-        listaTarea.setBackground(colorTareaBack);
-        listaProceso.setBackground(colorProcesoBack);
-        listaHecho.setBackground(colorHechoBack);
-        btnInicio.setBackground(colorBack);
-        btnConfig.setBackground(colorBack);
-        btnRemoveTarea.setBackground(colorRemove);
-        btnRemoveProceso.setBackground(colorRemove);
-        btnRemoveHecho.setBackground(colorRemove);
-        btnDchaTarea.setBackground(colorProcesoBack);
-        btnIzqProceso.setBackground(colorTareaBack);
-        btnDchaProceso.setBackground(colorHechoBack);
-        btnIzqHecho.setBackground(colorProcesoBack);
+        lblTTarea.setIcon(imgTarea);
+        lblTProceso.setIcon(imgProceso);
+        lblTHecho.setIcon(imgHecho);
 
-        btnInicio.setFocusPainted(false);
-        btnConfig.setFocusPainted(false);
-        btnRemoveTarea.setFocusPainted(false);
-        btnRemoveProceso.setFocusPainted(false);
-        btnRemoveHecho.setFocusPainted(false);
-        btnDchaTarea.setFocusPainted(false);
-        btnIzqProceso.setFocusPainted(false);
-        btnDchaProceso.setFocusPainted(false);
-        btnIzqHecho.setFocusPainted(false);
-        btnRemoveTarea.setFocusPainted(false);
-        btnRemoveProceso.setFocusPainted(false);
-        btnRemoveHecho.setFocusPainted(false);
-        btnTareaOk.setFocusPainted(false);
-        btnProcesoOk.setFocusPainted(false);
-        btnHechoOk.setFocusPainted(false);
+        pnlGlobal.setBackground(COLOR_BACK);
+        pnlTareas.setBackground(COLOR_TAREA);
+        pnlProceso.setBackground(COLOR_PROCESO);
+        pnlHecho.setBackground(COLOR_HECHO);
+        listaTarea.setBackground(COLOR_TAREA_BACK);
+        listaProceso.setBackground(COLOR_PROCESO_BACK);
+        listaHecho.setBackground(COLOR_HECHO_BACK);
+        btnInicio.setBackground(COLOR_BACK);
+        btnEditar.setBackground(COLOR_BACK);
+        btnRemoveTarea.setBackground(COLOR_REMOVE);
+        btnRemoveProceso.setBackground(COLOR_REMOVE);
+        btnRemoveHecho.setBackground(COLOR_REMOVE);
+        btnDchaTarea.setBackground(COLOR_PROCESO_BACK);
+        btnIzqProceso.setBackground(COLOR_TAREA_BACK);
+        btnDchaProceso.setBackground(COLOR_HECHO_BACK);
+        btnIzqHecho.setBackground(COLOR_PROCESO_BACK);
+        listaTarea.setSelectionBackground(COLOR_TAREA);
+        listaProceso.setSelectionBackground(COLOR_PROCESO);
+        listaHecho.setSelectionBackground(COLOR_HECHO);
 
-        pnlCentral.setOpaque(false);
-
-        listaTarea.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listaProceso.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listaHecho.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        listaTarea.setVisibleRowCount(-1);
-        listaProceso.setVisibleRowCount(-1);
-        listaHecho.setVisibleRowCount(-1);
+        lblTitulo.setFont(FUENTE_NEGRITA);
+        listaTarea.setFont(FUENTE_NEGRITA);
+        listaProceso.setFont(FUENTE_NEGRITA);
+        listaHecho.setFont(FUENTE_NEGRITA);
+        txtTarea.setFont(FUENTE_NEGRITA);
+        txtProceso.setFont(FUENTE_NEGRITA);
+        txtHecho.setFont(FUENTE_NEGRITA);
+        lblTTarea.setFont(FUENTE_NEGRITA);
+        lblTProceso.setFont(FUENTE_NEGRITA);
+        lblTHecho.setFont(FUENTE_NEGRITA);
 
         txtTarea.setMargin(new Insets(0, 5, 0, 0));
         txtProceso.setMargin(new Insets(0, 5, 0, 0));
@@ -274,56 +276,79 @@ public class VistaTareas extends JFrame {
         lblTProceso.setBorder(BorderFactory.createEmptyBorder(2, 5, 5, 5));
         lblTHecho.setBorder(BorderFactory.createEmptyBorder(2, 5, 5, 5));
 
-        lblTitulo.setFont(fuenteNegrita);
-        listaTarea.setFont(fuenteNegrita);
-        listaProceso.setFont(fuenteNegrita);
-        listaHecho.setFont(fuenteNegrita);
+        btnInicio.setFocusPainted(false);
+        btnEditar.setFocusPainted(false);
+        btnRemoveTarea.setFocusPainted(false);
+        btnRemoveProceso.setFocusPainted(false);
+        btnRemoveHecho.setFocusPainted(false);
+        btnDchaTarea.setFocusPainted(false);
+        btnIzqProceso.setFocusPainted(false);
+        btnDchaProceso.setFocusPainted(false);
+        btnIzqHecho.setFocusPainted(false);
+        btnRemoveTarea.setFocusPainted(false);
+        btnRemoveProceso.setFocusPainted(false);
+        btnRemoveHecho.setFocusPainted(false);
+        btnTareaOk.setFocusPainted(false);
+        btnProcesoOk.setFocusPainted(false);
+        btnHechoOk.setFocusPainted(false);
 
-        listaTarea.setSelectionBackground(colorTarea);
-        listaProceso.setSelectionBackground(colorProceso);
-        listaHecho.setSelectionBackground(colorHecho);
+        pnlCentral.setOpaque(false);
+        pnlTNTarea.setOpaque(false);
+        pnlTNProceso.setOpaque(false);
+        pnlTNHecho.setOpaque(false);
 
-        txtTarea.setFont(fuenteNegrita);
-        txtProceso.setFont(fuenteNegrita);
-        txtHecho.setFont(fuenteNegrita);
-        lblTTarea.setFont(fuenteNegrita);
-        lblTProceso.setFont(fuenteNegrita);
-        lblTHecho.setFont(fuenteNegrita);
+        listaTarea.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listaProceso.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listaHecho.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        lblTTarea.setIcon(imgTarea);
-        lblTProceso.setIcon(imgProceso);
-        lblTHecho.setIcon(imgHecho);
+        listaTarea.setVisibleRowCount(-1);
+        listaProceso.setVisibleRowCount(-1);
+        listaHecho.setVisibleRowCount(-1);
+
+        auxEstiloBotonSimple(btnTareaArriba);
+        auxEstiloBotonSimple(btnTareaAbajo);
+        auxEstiloBotonSimple(btnProcesoArriba);
+        auxEstiloBotonSimple(btnProcesoAbajo);
+        auxEstiloBotonSimple(btnHechoArriba);
+        auxEstiloBotonSimple(btnHechoAbajo);
     }
 
-    // Controla los eventos de la ventana.
-    private void eventos() {
-
+    @Override
+    protected void eventos() {
         btnInicio.addActionListener((ActionEvent e) -> {
             controlador.volverInicio();
         });
 
-        btnTareaOk.addActionListener((ActionEvent e) -> {
-            addTarea();
+        btnEditar.addActionListener((ActionEvent e) -> {
+            String nombreNuevo = pedirTexto("Editar", lblTitulo.getText());
+            if (nombreNuevo != null) {
+                controlador.setNombreProyecto(nombreNuevo);
+                lblTitulo.setText(nombreNuevo);
+            }
         });
 
         txtTarea.addActionListener((ActionEvent e) -> {
-            addTarea();
+            addElemento(ID_TAREAS);
         });
 
-        btnProcesoOk.addActionListener((ActionEvent e) -> {
-            addProgreso();
+        btnTareaOk.addActionListener((ActionEvent e) -> {
+            addElemento(ID_TAREAS);
         });
 
         txtProceso.addActionListener((ActionEvent e) -> {
-            addProgreso();
+            addElemento(ID_PROCESOS);
         });
 
-        btnHechoOk.addActionListener((ActionEvent e) -> {
-            addHecho();
+        btnProcesoOk.addActionListener((ActionEvent e) -> {
+            addElemento(ID_PROCESOS);
         });
 
         txtHecho.addActionListener((ActionEvent e) -> {
-            addHecho();
+            addElemento(ID_HECHOS);
+        });
+
+        btnHechoOk.addActionListener((ActionEvent e) -> {
+            addElemento(ID_HECHOS);
         });
 
         btnDchaTarea.addActionListener((ActionEvent e) -> {
@@ -375,7 +400,31 @@ public class VistaTareas extends JFrame {
             }
         });
 
-        // Al cerrar esta ventana (JDialog)
+        btnTareaArriba.addActionListener((ActionEvent e) -> {
+            controlador.subirTarea(listaTarea.getSelectedIndex());
+        });
+
+        btnTareaAbajo.addActionListener((ActionEvent e) -> {
+            controlador.bajarTarea(listaTarea.getSelectedIndex());
+        });
+
+        btnProcesoArriba.addActionListener((ActionEvent e) -> {
+            controlador.subirProceso(listaProceso.getSelectedIndex());
+        });
+
+        btnProcesoAbajo.addActionListener((ActionEvent e) -> {
+            controlador.bajarProceso(listaProceso.getSelectedIndex());
+        });
+
+        btnHechoArriba.addActionListener((ActionEvent e) -> {
+            controlador.subirHecho(listaHecho.getSelectedIndex());
+        });
+
+        btnHechoAbajo.addActionListener((ActionEvent e) -> {
+            controlador.bajarHecho(listaHecho.getSelectedIndex());
+        });
+
+        // Al cerrar esta ventana (JFrame).
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -384,94 +433,105 @@ public class VistaTareas extends JFrame {
         });
     }
 
-    private void definirTamanioVentana(double pxAlto, double pxAncho) {
-        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+    // ########################## METODOS ##########################
+    public void refrescarLista(byte idLista, String[] cadenas, int indice) {
+        DefaultListModel modeloLista;
+        JList listaActual;
+        int indiceSeleccionado;
+        JLabel lblTitulo;
+        JButton btnSubir;
+        JButton btnBajar;
 
-        double altoFinal = pantalla.height * pxAlto / 720;
-        double anchoFinal = pantalla.width * pxAncho / 1280;
+        switch (idLista) {
+            case ID_HECHOS:
+                modeloLista = lmHecho;
+                listaActual = listaHecho;
+                lblTitulo = lblTHecho;
+                lblTitulo.setText("Hechos");
+                btnSubir = btnHechoArriba;
+                btnBajar = btnHechoAbajo;
+                break;
+            case ID_PROCESOS:
+                modeloLista = lmProceso;
+                listaActual = listaProceso;
+                lblTitulo = lblTProceso;
+                lblTitulo.setText("En proceso");
+                btnSubir = btnProcesoArriba;
+                btnBajar = btnProcesoAbajo;
+                break;
+            default:
+                modeloLista = lmTareas;
+                listaActual = listaTarea;
+                lblTitulo = lblTTarea;
+                lblTitulo.setText("Lista de tareas");
+                btnSubir = btnTareaArriba;
+                btnBajar = btnTareaAbajo;
+                break;
+        }
 
-        setSize(new Dimension((int) anchoFinal, (int) altoFinal));
+        indiceSeleccionado = listaActual.getSelectedIndex();
+        modeloLista.clear();
+
+        for (int i = cadenas.length - 1; i > -1; i--) {
+            modeloLista.addElement(cadenas[i]);
+        }
+
+        // Si el indice es -1 significa que el indice se va a desplazar de forma automatica ya que se ha aniadido un elemento.
+        if (indice == -1) {
+            if (modeloLista.size() - 1 < indiceSeleccionado) {
+                indiceSeleccionado--;
+            }
+            if (!modeloLista.isEmpty() && indiceSeleccionado < 0) {
+                indiceSeleccionado = 0;
+            }
+            listaActual.setSelectedIndex(indiceSeleccionado);
+        } else {
+            listaActual.setSelectedIndex(indice);
+        }
+
+        if (cadenas.length != 0) {
+            lblTitulo.setText(lblTitulo.getText() + " [" + cadenas.length + "]");
+        }
+
+        if (cadenas.length > 1) {
+            btnSubir.setEnabled(true);
+            btnBajar.setEnabled(true);
+        } else {
+            btnSubir.setEnabled(false);
+            btnBajar.setEnabled(false);
+        }
     }
 
-    public void refrescarListaTareas(String[] tareas) {
-        indiceTarea = listaTarea.getSelectedIndex();
-        lmTareas.clear();
+    private void addElemento(byte idElemento) {
+        String elementoNuevo;
 
-        for (int i = tareas.length - 1; i > -1; i--) {
-            lmTareas.addElement(tareas[i]);
+        switch (idElemento) {
+            case ID_TAREAS:
+                elementoNuevo = txtTarea.getText();
+                txtTarea.setText("");
+                break;
+            case ID_PROCESOS:
+                elementoNuevo = txtProceso.getText();
+                txtProceso.setText("");
+                break;
+            default:
+                elementoNuevo = txtHecho.getText();
+                txtHecho.setText("");
+                break;
         }
 
-        if (lmTareas.size() - 1 < indiceTarea) {
-            indiceTarea--;
+        elementoNuevo = elementoNuevo.trim();
+
+        if (!elementoNuevo.isEmpty()) {
+            controlador.addElemento(idElemento, elementoNuevo);
         }
-        if (!lmTareas.isEmpty() && indiceTarea < 0) {
-            indiceTarea = 0;
-        }
-        listaTarea.setSelectedIndex(indiceTarea);
     }
 
-    public void refrescarListaProcesos(String[] procesos) {
-        indiceProceso = listaProceso.getSelectedIndex();
-        lmProceso.clear();
-
-        for (int i = procesos.length - 1; i > -1; i--) {
-            lmProceso.addElement(procesos[i]);
-        }
-
-        if (lmProceso.size() - 1 < indiceProceso) {
-            indiceProceso--;
-        }
-        if (!lmProceso.isEmpty() && indiceProceso < 0) {
-            indiceProceso = 0;
-        }
-        listaProceso.setSelectedIndex(indiceProceso);
+    // ########################## METODOS AUXILIARES ##########################
+    private void auxEstiloBotonSimple(JButton btn) {
+        btn.setContentAreaFilled(false);
+        btn.setOpaque(false);
+        btn.setFocusPainted(false);
+        btn.setBorderPainted(false);
     }
-
-    public void refrescarListaHechos(String[] hechos) {
-        indiceHecho = listaHecho.getSelectedIndex();
-        lmHecho.clear();
-
-        for (int i = hechos.length - 1; i > -1; i--) {
-            lmHecho.addElement(hechos[i]);
-        }
-
-        if (lmHecho.size() - 1 < indiceHecho) {
-            indiceHecho--;
-        }
-        if (!lmHecho.isEmpty() && indiceHecho < 0) {
-            indiceHecho = 0;
-        }
-        listaHecho.setSelectedIndex(indiceHecho);
-
-    }
-
-    private void addTarea() {
-        String cadena = txtTarea.getText().trim();
-        if (!cadena.isEmpty()) {
-            controlador.addTarea(cadena);
-        }
-        txtTarea.setText("");
-    }
-
-    private void addProgreso() {
-        String cadena = txtProceso.getText().trim();
-        if (!cadena.isEmpty()) {
-            controlador.addProceso(cadena);
-        }
-        txtProceso.setText("");
-    }
-
-    private void addHecho() {
-        String cadena = txtHecho.getText().trim();
-        if (!cadena.isEmpty()) {
-            controlador.addHecho(cadena);
-        }
-        txtHecho.setText("");
-    }
-
-    public void mostrarMensaje(String mensaje, boolean esError) {
-        JOptionPane.showMessageDialog(this, mensaje, "Aceptar",
-                esError ? JOptionPane.ERROR_MESSAGE : JOptionPane.INFORMATION_MESSAGE);
-    }
-
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import vista.Vista;
 
 /**
  * Esta clase contiene los datos que se van a guardar.
@@ -62,6 +63,14 @@ public class Proyecto implements Serializable {
         return coleccionTareas.size();
     }
 
+    public int subirTarea(int indice) {
+        return subirElemento(indice, coleccionTareas);
+    }
+
+    public int bajarTarea(int indice) {
+        return bajarElemento(indice, coleccionTareas);
+    }
+
     // ########################## PROCESOS ##########################
     public void addProceso(String proceso) {
         coleccionProcesos.add(proceso);
@@ -79,6 +88,14 @@ public class Proyecto implements Serializable {
         return coleccionProcesos.size();
     }
 
+    public int subirProceso(int indice) {
+        return subirElemento(indice, coleccionProcesos);
+    }
+
+    public int bajarProceso(int indice) {
+        return bajarElemento(indice, coleccionProcesos);
+    }
+
     // ########################## HECHOS ##########################
     public void addHecho(String hecho) {
         coleccionHechos.add(hecho);
@@ -94,6 +111,14 @@ public class Proyecto implements Serializable {
 
     public int getNumHechos() {
         return coleccionHechos.size();
+    }
+
+    public int subirHecho(int indice) {
+        return subirElemento(indice, coleccionHechos);
+    }
+
+    public int bajarHecho(int indice) {
+        return bajarElemento(indice, coleccionHechos);
     }
 
     // ########################## OTROS METODOS ##########################
@@ -129,6 +154,9 @@ public class Proyecto implements Serializable {
         String nombreArchivo = "";
 
         for (String palabra : palabras) {
+            if (palabra.isEmpty()) {
+                continue;
+            }
             palabra = palabra.substring(0, 1).toUpperCase() + palabra.substring(1, palabra.length());
             nombreArchivo += palabra;
         }
@@ -142,6 +170,36 @@ public class Proyecto implements Serializable {
 
     private static String getFechaActual() {
         return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+    }
+
+    private int subirElemento(int indice, ArrayList<String> coleccion) {
+        int indiceMax = coleccion.size() - 1;
+        int indiceReal = indiceMax - indice;
+
+        if (indiceReal < indiceMax) {
+            String tareaAnterior = coleccion.get(indiceReal + 1);
+            coleccion.set(indiceReal + 1, coleccion.get(indiceReal));
+            coleccion.set(indiceReal, tareaAnterior);
+
+            return indice - 1;
+        }
+
+        return Vista.INDICE_AUTO;
+    }
+
+    private int bajarElemento(int indice, ArrayList<String> coleccion) {
+        int indiceMax = coleccion.size() - 1;
+        int indiceReal = indiceMax - indice;
+
+        if (indiceReal > 0) {
+            String tareaAnterior = coleccion.get(indiceReal - 1);
+            coleccion.set(indiceReal - 1, coleccion.get(indiceReal));
+            coleccion.set(indiceReal, tareaAnterior);
+
+            return indice + 1;
+        }
+
+        return Vista.INDICE_AUTO;
     }
 
     @Override

@@ -2,68 +2,40 @@ package vista;
 
 import controlador.ControladorPrincipal;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 /**
- * Vista principal, la cual muestra los proyectos y su estado.
+ * Vista principal, la cual muestra los proyectos y su estado. Esta clase no
+ * puede ser heredada (final).
  *
  * @author Carlos Aguirre
  */
-public class VistaPrincipal extends JFrame {
+public final class VistaPrincipal extends Vista {
 
-    private static final int LIMITE_NOMBRE = 30;
-
-    private ControladorPrincipal controlador;
-
-    private JPanel pnlGlobal, pnlNorte, pnlNorte1, pnlNorte2, pnlCentral, pnlSur, pnlCentroIzq, pnlCentroCentral;
-
+    // ########################## CAMPOS ##########################
+    private JPanel pnlGlobal, pnlNorte, pnlNorte1, pnlNorte2, pnlCentral,
+            pnlSur, pnlCentroIzq, pnlCentroCentral;
     private JComboBox<String> cmbProyectos;
-
     private JButton btnNuevo, btnAbrir, btnEliminar, btnAcercaDe;
+    private JLabel lblSelecciona, lblTituloInfo, lblNombreArchivoInfo,
+            lblFechaCreacionInfo, lblFechaModificacionInfo, lblEstadoInfo,
+            lblTitulo, lblNombreArchivo, lblFechaCreacion, lblFechaModificacion,
+            lblEstado, lblTareasInfo, lblProcesosInfo, lblHechosInfo, lblTareas,
+            lblProcesos, lblHechos;
+    private final ControladorPrincipal controlador;
 
-    private JLabel lblSelecciona, lblTituloInfo, lblNombreArchivoInfo, lblFechaCreacionInfo, lblFechaModificacionInfo, lblEstadoInfo, lblTitulo, lblNombreArchivo, lblFechaCreacion, lblFechaModificacion, lblEstado;
-    private JLabel lblTareasInfo, lblProcesosInfo, lblHechosInfo;
-    private JLabel lblTareas, lblProcesos, lblHechos;
-
-    private final ImageIcon imgPapelera = new ImageIcon(getClass().getResource("/recursos/papelera.png"));
-    private final ImageIcon imgTarea = new ImageIcon(getClass().getResource("/recursos/tarea.png"));
-    private final ImageIcon imgProceso = new ImageIcon(getClass().getResource("/recursos/proceso.png"));
-    private final ImageIcon imgHecho = new ImageIcon(getClass().getResource("/recursos/hecho.png"));
-    private final ImageIcon imgAbrir = new ImageIcon(getClass().getResource("/recursos/abrir.png"));
-    private final ImageIcon imgNuevo = new ImageIcon(getClass().getResource("/recursos/nuevo.png"));
-    private final ImageIcon imgInfo = new ImageIcon(getClass().getResource("/recursos/info.png"));
-    private final ImageIcon imgOk = new ImageIcon(getClass().getResource("/recursos/ok.png"));
-
-    private final Font fuente = new Font("Default", Font.PLAIN, 15);
-    private final Font fuenteNegrita = new Font("Default", Font.BOLD, 15);
-    private final Font fuenteGrande = new Font("Default", Font.BOLD, 30);
-
-    private final Color colorTarea = new Color(242, 181, 57);
-    private final Color colorTareaBack = new Color(254, 239, 208);
-    private final Color colorProceso = new Color(145, 185, 243);
-    private final Color colorProcesoBack = new Color(227, 238, 254);
-    private final Color colorHecho = new Color(139, 214, 1);
-    private final Color colorHechoBack = new Color(227, 254, 234);
-    private final Color colorRemove = new Color(254, 229, 238);
-    private final Color colorBack = new Color(254, 249, 251);
-
+    // ########################## CONSTRUCTOR ##########################
     public VistaPrincipal(ControladorPrincipal controlador) {
+        // Definir el controlador.
         this.controlador = controlador;
 
         // Pasos para la creacion de la ventana.
@@ -74,14 +46,16 @@ public class VistaPrincipal extends JFrame {
         this.eventos();
 
         // Propiedades de la ventana.
-        this.setResizable(false);
-        this.setTitle("Control de proyectos");
-        this.definirTamanioVentana(220, 420);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        super.setResizable(false);
+        super.setTitle("Control de proyectos");
+        super.definirTamanioVentana(220, 420);
+        super.setLocationRelativeTo(null);
+        super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    private void crearElementos() {
+    // ########################## METODOS SOBRESCRITOS ##########################
+    @Override
+    protected void crearElementos() {
         pnlGlobal = new JPanel();
         pnlNorte = new JPanel();
         pnlNorte1 = new JPanel();
@@ -117,7 +91,8 @@ public class VistaPrincipal extends JFrame {
         lblHechos = new JLabel("--", SwingConstants.CENTER);
     }
 
-    private void crearDistribucion() {
+    @Override
+    protected void crearDistribucion() {
         pnlGlobal.setLayout(new BorderLayout());
         pnlNorte.setLayout(new GridLayout(2, 1));
         pnlNorte1.setLayout(new BorderLayout());
@@ -128,12 +103,16 @@ public class VistaPrincipal extends JFrame {
         pnlCentroCentral.setLayout(new GridLayout(5, 1));
     }
 
-    private void colocarElementos() {
-        this.getContentPane().add(pnlGlobal);
+    @Override
+    protected void colocarElementos() {
+        super.getContentPane().add(pnlGlobal);
+
         pnlGlobal.add(pnlNorte, BorderLayout.NORTH);
+        pnlGlobal.add(pnlCentral, BorderLayout.CENTER);
+        pnlGlobal.add(pnlSur, BorderLayout.SOUTH);
+
         pnlNorte.add(pnlNorte1);
         pnlNorte.add(pnlNorte2);
-
         pnlNorte1.add(lblSelecciona, BorderLayout.WEST);
         pnlNorte1.add(cmbProyectos, BorderLayout.CENTER);
         pnlNorte1.add(btnAcercaDe, BorderLayout.EAST);
@@ -141,24 +120,19 @@ public class VistaPrincipal extends JFrame {
         pnlNorte2.add(btnAbrir);
         pnlNorte2.add(btnEliminar);
 
-        pnlGlobal.add(pnlCentral, BorderLayout.CENTER);
-
         pnlCentral.add(pnlCentroIzq, BorderLayout.WEST);
         pnlCentral.add(pnlCentroCentral, BorderLayout.CENTER);
-
         pnlCentroIzq.add(lblTituloInfo);
         pnlCentroIzq.add(lblNombreArchivoInfo);
         pnlCentroIzq.add(lblFechaCreacionInfo);
         pnlCentroIzq.add(lblFechaModificacionInfo);
         pnlCentroIzq.add(lblEstadoInfo);
-
         pnlCentroCentral.add(lblTitulo);
         pnlCentroCentral.add(lblNombreArchivo);
         pnlCentroCentral.add(lblFechaCreacion);
         pnlCentroCentral.add(lblFechaModificacion);
         pnlCentroCentral.add(lblEstado);
 
-        pnlGlobal.add(pnlSur, BorderLayout.SOUTH);
         pnlSur.add(lblTareasInfo);
         pnlSur.add(lblProcesosInfo);
         pnlSur.add(lblHechosInfo);
@@ -167,8 +141,9 @@ public class VistaPrincipal extends JFrame {
         pnlSur.add(lblHechos);
     }
 
-    private void definirEstilos() {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/logo.png")));
+    @Override
+    protected void definirEstilos() {
+        super.setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/logo.png")));
 
         btnNuevo.setIcon(imgNuevo);
         btnAbrir.setIcon(imgAbrir);
@@ -178,33 +153,34 @@ public class VistaPrincipal extends JFrame {
         lblHechosInfo.setIcon(imgHecho);
         btnAcercaDe.setIcon(imgInfo);
 
-        btnNuevo.setFocusPainted(false);
-        btnAbrir.setFocusPainted(false);
-        btnEliminar.setFocusPainted(false);
-        btnAcercaDe.setFocusPainted(false);
+        pnlGlobal.setBackground(COLOR_BACK);
+        cmbProyectos.setBackground(COLOR_PROCESO_BACK);
+        btnAcercaDe.setBackground(COLOR_PROCESO_BACK);
+        btnNuevo.setBackground(COLOR_BACK);
+        btnAbrir.setBackground(COLOR_HECHO_BACK);
+        btnEliminar.setBackground(COLOR_REMOVE);
 
-        lblSelecciona.setFont(fuente);
-        cmbProyectos.setFont(fuenteNegrita);
-        btnNuevo.setFont(fuenteNegrita);
-        btnAbrir.setFont(fuenteNegrita);
-        btnEliminar.setFont(fuenteNegrita);
-        lblTituloInfo.setFont(fuenteNegrita);
-        lblNombreArchivoInfo.setFont(fuenteNegrita);
-        lblFechaCreacionInfo.setFont(fuenteNegrita);
-        lblFechaModificacionInfo.setFont(fuenteNegrita);
-        lblEstadoInfo.setFont(fuenteNegrita);
-        lblTareasInfo.setFont(fuenteNegrita);
-        lblProcesosInfo.setFont(fuenteNegrita);
-        lblHechosInfo.setFont(fuenteNegrita);
-
-        lblTitulo.setFont(fuente);
-        lblNombreArchivo.setFont(fuente);
-        lblFechaCreacion.setFont(fuente);
-        lblFechaModificacion.setFont(fuente);
-        lblEstado.setFont(fuente);
-        lblTareas.setFont(fuenteGrande);
-        lblProcesos.setFont(fuenteGrande);
-        lblHechos.setFont(fuenteGrande);
+        lblSelecciona.setFont(FUENTE);
+        cmbProyectos.setFont(FUENTE_NEGRITA);
+        btnNuevo.setFont(FUENTE_NEGRITA);
+        btnAbrir.setFont(FUENTE_NEGRITA);
+        btnEliminar.setFont(FUENTE_NEGRITA);
+        lblTituloInfo.setFont(FUENTE_NEGRITA);
+        lblNombreArchivoInfo.setFont(FUENTE_NEGRITA);
+        lblFechaCreacionInfo.setFont(FUENTE_NEGRITA);
+        lblFechaModificacionInfo.setFont(FUENTE_NEGRITA);
+        lblEstadoInfo.setFont(FUENTE_NEGRITA);
+        lblTareasInfo.setFont(FUENTE_NEGRITA);
+        lblProcesosInfo.setFont(FUENTE_NEGRITA);
+        lblHechosInfo.setFont(FUENTE_NEGRITA);
+        lblTitulo.setFont(FUENTE);
+        lblNombreArchivo.setFont(FUENTE);
+        lblFechaCreacion.setFont(FUENTE);
+        lblFechaModificacion.setFont(FUENTE);
+        lblEstado.setFont(FUENTE);
+        lblTareas.setFont(FUENTE_GRANDE);
+        lblProcesos.setFont(FUENTE_GRANDE);
+        lblHechos.setFont(FUENTE_GRANDE);
 
         pnlGlobal.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         lblSelecciona.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 10));
@@ -213,17 +189,14 @@ public class VistaPrincipal extends JFrame {
         pnlCentral.setBorder(BorderFactory.createEmptyBorder(10, 5, 5, 5));
         pnlSur.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pnlCentroIzq.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+        lblTareas.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, COLOR_TAREA));
+        lblProcesos.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, COLOR_PROCESO));
+        lblHechos.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, COLOR_HECHO));
 
-        lblTareas.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, colorTarea));
-        lblProcesos.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, colorProceso));
-        lblHechos.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, colorHecho));
-
-        pnlGlobal.setBackground(colorBack);
-        cmbProyectos.setBackground(colorProcesoBack);
-        btnAcercaDe.setBackground(colorProcesoBack);
-        btnNuevo.setBackground(colorBack);
-        btnAbrir.setBackground(colorHechoBack);
-        btnEliminar.setBackground(colorRemove);
+        btnNuevo.setFocusPainted(false);
+        btnAbrir.setFocusPainted(false);
+        btnEliminar.setFocusPainted(false);
+        btnAcercaDe.setFocusPainted(false);
 
         pnlCentral.setOpaque(false);
         pnlSur.setOpaque(false);
@@ -234,34 +207,35 @@ public class VistaPrincipal extends JFrame {
         pnlCentroCentral.setOpaque(false);
     }
 
-    private void eventos() {
-        cmbProyectos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controlador.proyectoSeleccionado(cmbProyectos.getSelectedIndex());
-            }
+    @Override
+    protected void eventos() {
+        cmbProyectos.addActionListener((ActionEvent e) -> {
+            controlador.mostrarInfoProyectoSeleccionado(cmbProyectos.getSelectedIndex());
         });
 
-        btnNuevo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                nuevoProyecto();
-            }
+        btnAcercaDe.addActionListener((ActionEvent e) -> {
+            controlador.mostrarVistaAcerca(true);
         });
 
-        btnAbrir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controlador.abrirProyectoSeleccionado();
-            }
+        btnNuevo.addActionListener((ActionEvent e) -> {
+            accionNuevoProyecto();
         });
 
-        btnEliminar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controlador.eliminarProyectoSeleccionado();
-            }
+        btnAbrir.addActionListener((ActionEvent e) -> {
+            controlador.abrirProyectoSeleccionado();
         });
+
+        btnEliminar.addActionListener((ActionEvent e) -> {
+            controlador.eliminarProyectoSeleccionado();
+        });
+    }
+
+    // ########################## METODOS ##########################
+    private void accionNuevoProyecto() {
+        String respuesta = pedirTexto("Nuevo proyecto", "");
+        if (respuesta != null) {
+            controlador.crearProyectoNuevo(respuesta);
+        }
     }
 
     public void setListadoProyectos(String[] listado) {
@@ -282,12 +256,14 @@ public class VistaPrincipal extends JFrame {
         }
     }
 
-    public void setInfoProyecto(
-            String nombreProyecto,
-            String nombreArchivo,
-            String fechaCreacion,
-            String fechaModificacion,
-            String estado,
+    public void setElementoSeleccionado(int indice) {
+        if (indice < cmbProyectos.getItemCount()) {
+            cmbProyectos.setSelectedIndex(indice);
+        }
+    }
+
+    public void setInfoProyecto(String nombreProyecto, String nombreArchivo,
+            String fechaCreacion, String fechaModificacion, String estado,
             int tareas, int procesos, int hechos) {
 
         lblTitulo.setText(nombreProyecto);
@@ -298,42 +274,6 @@ public class VistaPrincipal extends JFrame {
         lblTareas.setText(tareas == -1 ? "--" : Integer.toString(tareas));
         lblProcesos.setText(procesos == -1 ? "--" : Integer.toString(procesos));
         lblHechos.setText(hechos == -1 ? "--" : Integer.toString(hechos));
-
-    }
-
-    private void definirTamanioVentana(double pxAlto, double pxAncho) {
-        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-
-        double altoFinal = pantalla.height * pxAlto / 720;
-        double anchoFinal = pantalla.width * pxAncho / 1280;
-
-        setSize(new Dimension((int) anchoFinal, (int) altoFinal));
-    }
-
-    public void nuevoProyecto() {
-        String respuesta = JOptionPane.showInputDialog(this, "Introduce el nombre del proyecto.\n(No debe exceder los " + LIMITE_NOMBRE + " caracteres)", "Nuevo proyecto", JOptionPane.INFORMATION_MESSAGE);
-
-        if (respuesta != null) {
-            respuesta = respuesta.trim();
-            if (respuesta.length() > LIMITE_NOMBRE) {
-                respuesta = respuesta.substring(0, LIMITE_NOMBRE);
-            }
-            controlador.crearProyectoNuevo(respuesta);
-        }
-    }
-
-    public void setElementoSeleccionado(int indice) {
-        cmbProyectos.setSelectedIndex(indice);
-    }
-
-    public void mostrarMensaje(String mensaje, boolean esError) {
-        JOptionPane.showMessageDialog(this, mensaje, "Aceptar",
-                esError ? JOptionPane.ERROR_MESSAGE : JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    public boolean preguntaSeguridad(String mensaje) {
-        int decision = JOptionPane.showConfirmDialog(this, mensaje, "Confirmar", JOptionPane.YES_NO_OPTION);
-        return decision == JOptionPane.YES_OPTION;
     }
 
 }
