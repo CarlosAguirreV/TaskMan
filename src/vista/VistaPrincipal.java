@@ -47,7 +47,7 @@ public final class VistaPrincipal extends Vista {
 
         // Propiedades de la ventana.
         super.setResizable(false);
-        super.setTitle("Control de proyectos");
+        super.setTitle("Task Man");
         super.definirTamanioVentana(220, 420);
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

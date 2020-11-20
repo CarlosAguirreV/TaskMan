@@ -61,7 +61,7 @@ public final class VistaTareas extends Vista {
 
         // Propiedades de la ventana.
         super.setResizable(true);
-        super.setTitle("Gestión de tareas");
+        super.setTitle("Task Man");
         super.definirTamanioVentana(450, 700);
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
