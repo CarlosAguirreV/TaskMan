@@ -1,13 +1,16 @@
 package vista;
 
-import controlador.Main;
+import static modelo.Constantes.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static modelo.Diccionario.*;
 
 /**
  * Clase abstracta que contiene los elementos comunes entre las vistas.
@@ -17,12 +20,6 @@ import javax.swing.JOptionPane;
 public abstract class Vista extends JFrame {
 
     // ########################## CAMPOS ##########################
-    protected static final int LIMITE_NOMBRE = 30;
-    public static final byte ID_TAREAS = 0;
-    public static final byte ID_PROCESOS = 1;
-    public static final byte ID_HECHOS = 2;
-    public static final byte INDICE_AUTO = -1;
-
     protected static final Font FUENTE = new Font("Default", Font.PLAIN, 15);
     protected static final Font FUENTE_NEGRITA = new Font("Default", Font.BOLD, 15);
     protected static final Font FUENTE_GRANDE = new Font("Default", Font.BOLD, 30);
@@ -52,9 +49,22 @@ public abstract class Vista extends JFrame {
     protected final ImageIcon imgIzq = new ImageIcon(getClass().getResource("/recursos/izq.png"));
     protected final ImageIcon imgArriba = new ImageIcon(getClass().getResource("/recursos/arriba.png"));
     protected final ImageIcon imgAbajo = new ImageIcon(getClass().getResource("/recursos/abajo.png"));
-    protected final ImageIcon imgLogo = new ImageIcon(getClass().getResource("/recursos/logo2.png"));
+    protected final ImageIcon imgLogo = new ImageIcon(getClass().getResource("/recursos/logo.png"));
     protected final ImageIcon imgCerrar = new ImageIcon(getClass().getResource("/recursos/cerrar.png"));
     protected final ImageIcon imgDonar = new ImageIcon(getClass().getResource("/recursos/donar.png"));
+
+    protected final ArrayList<Image> icono;
+
+    // ########################## CONSTRUCTOR PREVIO ##########################
+    {
+        icono = new ArrayList();
+        icono.add(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/icono1.png")));
+        icono.add(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/icono2.png")));
+        icono.add(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/icono3.png")));
+        icono.add(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/icono4.png")));
+        this.setIconImages(icono);
+        this.setTitle(NOMBRE_APLICACION);
+    }
 
     // ########################## METODOS ABSTRACTOS ##########################
     // Crea todos los elementos de la ventana.
@@ -83,12 +93,12 @@ public abstract class Vista extends JFrame {
     }
 
     public void mostrarMensaje(String mensaje, boolean esError) {
-        JOptionPane.showMessageDialog(this, mensaje, "Aceptar",
+        JOptionPane.showMessageDialog(this, mensaje, ACEPTAR,
                 esError ? JOptionPane.ERROR_MESSAGE : JOptionPane.INFORMATION_MESSAGE);
     }
 
     public String pedirTexto(String titulo, String textoPorDefecto) {
-        Object objetoRecibido = JOptionPane.showInputDialog(this, "Introduce el nombre del proyecto.\n(No debe exceder los " + LIMITE_NOMBRE + " caracteres)", titulo, JOptionPane.INFORMATION_MESSAGE, null, null, textoPorDefecto);
+        Object objetoRecibido = JOptionPane.showInputDialog(this, INTRODUCE_NOMBRE_PRJ, titulo, JOptionPane.INFORMATION_MESSAGE, null, null, textoPorDefecto);
         String cadenaRecibida = null;
 
         if (objetoRecibido != null) {
@@ -112,11 +122,11 @@ public abstract class Vista extends JFrame {
     }
 
     public void mostrarLinkWeb() {
-        JOptionPane.showInputDialog(this, "Por algún motivo no se ha podido abrir el navegador.\nNo importa, te pongo el link aquí abajo.", "Donativo", JOptionPane.INFORMATION_MESSAGE, null, null, Main.WEB_DONATIVO);
+        JOptionPane.showInputDialog(this, FALLO_NAVEGADOR, DONATIVO, JOptionPane.INFORMATION_MESSAGE, null, null, WEB_DONATIVO);
     }
 
     public boolean preguntaSeguridad(String mensaje) {
-        int decision = JOptionPane.showConfirmDialog(this, mensaje, "Confirmar", JOptionPane.YES_NO_OPTION);
+        int decision = JOptionPane.showConfirmDialog(this, mensaje, CONFIRMAR, JOptionPane.YES_NO_OPTION);
         return decision == JOptionPane.YES_OPTION;
     }
 

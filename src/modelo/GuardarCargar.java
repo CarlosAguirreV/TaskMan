@@ -1,5 +1,6 @@
 package modelo;
 
+import static modelo.Constantes.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
+ * Esta clase se encarga del proceso de almacenar y recuperar datos.
  *
  * @author Carlos Aguirre
  */
@@ -17,9 +19,6 @@ public class GuardarCargar {
 
     private File ruta;
     private File archivo;
-    public static final String ARCHIVO_CONF = "configuracion.conf";
-    public static final String EXTENSION = "prj";
-    private static final String RUTA = "./proyectos/";
 
     public GuardarCargar() {
         this.ruta = new File(RUTA);

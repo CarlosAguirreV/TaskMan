@@ -1,7 +1,10 @@
 package controlador;
 
+import static modelo.Constantes.*;
 import java.util.ArrayList;
 import modelo.Configuracion;
+import modelo.Diccionario;
+import static modelo.Diccionario.*;
 import modelo.GuardarCargar;
 import modelo.Proyecto;
 import vista.VistaAcerca;
@@ -39,7 +42,7 @@ public final class ControladorPrincipal {
 
             vistaPrincipal.setInfoProyecto(
                     proyectoActual.getNombreProyecto(),
-                    proyectoActual.getNombreArchivo() + "." + GuardarCargar.EXTENSION,
+                    proyectoActual.getNombreArchivo() + "." + EXTENSION,
                     proyectoActual.getFechaCreacion(),
                     proyectoActual.getFechaModificacion(),
                     proyectoActual.getEstado(),
@@ -51,14 +54,14 @@ public final class ControladorPrincipal {
 
     public void crearProyectoNuevo(String nombre) {
         if (existeProyecto(nombre)) {
-            vistaPrincipal.mostrarMensaje("Ya existe un proyecto con ese nombre, usa otro.", true);
+            vistaPrincipal.mostrarMensaje(YA_EXISTE_PROYECTO, true);
         } else {
             proyectoActual = new Proyecto(nombre);
 
             if (cargarGuardar.guardarProyecto(proyectoActual)) {
                 abrirProyectoSeleccionado();
             } else {
-                vistaPrincipal.mostrarMensaje("No se ha podido guardar el nuevo proyecto.", true);
+                vistaPrincipal.mostrarMensaje(Diccionario.NO_SE_PUDO_GUARDAR_PRJ, true);
             }
         }
     }
@@ -80,11 +83,11 @@ public final class ControladorPrincipal {
 
     public void eliminarProyectoSeleccionado() {
         if (proyectoActual != null) {
-            if (vistaPrincipal.preguntaSeguridad("¿Estas seguro de que deseas borrarlo?")) {
+            if (vistaPrincipal.preguntaSeguridad(SEGURO_BORRAR)) {
                 if (cargarGuardar.eliminarProyecto(proyectoActual)) {
                     cargarListadoProyectos();
                 } else {
-                    vistaPrincipal.mostrarMensaje("No se ha podido eliminar el proyecto.", true);
+                    vistaPrincipal.mostrarMensaje(NO_SE_PUDO_ELIMINAR_PRJ, true);
                 }
             }
         }
@@ -102,7 +105,7 @@ public final class ControladorPrincipal {
     private void guardarConfiguracion() {
         if (this.configuracion != null) {
             if (!cargarGuardar.guardarConfiguracion(this.configuracion)) {
-                vistaPrincipal.mostrarMensaje("No se pudo guardar la configuracion.", true);
+                vistaPrincipal.mostrarMensaje(NO_SE_PUDO_GUARDAR_CONF, true);
             }
         }
     }

@@ -1,6 +1,6 @@
 package controlador;
 
-import vista.VistaAcerca;
+import static modelo.Constantes.*;
 
 /**
  * Clase principal que ejecuta la aplicacion. Esta aplicacion permite gestionar
@@ -10,9 +10,6 @@ import vista.VistaAcerca;
  * @author Carlos Aguirre
  */
 public class Main {
-
-    public final static String VERSION = "20-11-2020";
-    public final static String WEB_DONATIVO = "https://ko-fi.com/carlosaguirrev";
 
     public static void main(String[] args) {
         new ControladorPrincipal(VERSION);

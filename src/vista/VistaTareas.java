@@ -4,7 +4,6 @@ import controlador.ControlTareas;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -19,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import static modelo.Constantes.*;
+import static modelo.Diccionario.*;
 
 /**
  * Vista que permite gestionar las tareas. Esta clase no puede ser heredada
@@ -61,7 +62,6 @@ public final class VistaTareas extends Vista {
 
         // Propiedades de la ventana.
         super.setResizable(true);
-        super.setTitle("Task Man");
         super.definirTamanioVentana(450, 700);
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -83,10 +83,10 @@ public final class VistaTareas extends Vista {
         pnlInfProceso = new JPanel();
         pnlInfHecho = new JPanel();
 
-        lblTitulo = new JLabel("#", SwingConstants.CENTER);
-        lblTTarea = new JLabel("#", SwingConstants.CENTER);
-        lblTProceso = new JLabel("#", SwingConstants.CENTER);
-        lblTHecho = new JLabel("#", SwingConstants.CENTER);
+        lblTitulo = new JLabel(NADA, SwingConstants.CENTER);
+        lblTTarea = new JLabel(NADA, SwingConstants.CENTER);
+        lblTProceso = new JLabel(NADA, SwingConstants.CENTER);
+        lblTHecho = new JLabel(NADA, SwingConstants.CENTER);
 
         lmTareas = new DefaultListModel();
         lmProceso = new DefaultListModel();
@@ -223,8 +223,6 @@ public final class VistaTareas extends Vista {
 
     @Override
     protected void definirEstilos() {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/logo.png")));
-
         lblTTarea.setIcon(imgTarea);
         lblTProceso.setIcon(imgProceso);
         lblTHecho.setIcon(imgHecho);
@@ -320,7 +318,7 @@ public final class VistaTareas extends Vista {
         });
 
         btnEditar.addActionListener((ActionEvent e) -> {
-            String nombreNuevo = pedirTexto("Editar", lblTitulo.getText());
+            String nombreNuevo = pedirTexto(EDITAR, lblTitulo.getText());
             if (nombreNuevo != null) {
                 controlador.setNombreProyecto(nombreNuevo);
                 lblTitulo.setText(nombreNuevo);
@@ -353,49 +351,49 @@ public final class VistaTareas extends Vista {
 
         btnDchaTarea.addActionListener((ActionEvent e) -> {
             int indiceSeleccionado = listaTarea.getSelectedIndex();
-            if (indiceSeleccionado > -1) {
+            if (indiceSeleccionado > NADA_SELECCIONADO) {
                 controlador.tareaAProceso((lmTareas.size() - 1) - indiceSeleccionado);
             }
         });
 
         btnIzqProceso.addActionListener((ActionEvent e) -> {
             int indiceSeleccionado = listaProceso.getSelectedIndex();
-            if (indiceSeleccionado > -1) {
+            if (indiceSeleccionado > NADA_SELECCIONADO) {
                 controlador.procesoATarea((lmProceso.size() - 1) - indiceSeleccionado);
             }
         });
 
         btnDchaProceso.addActionListener((ActionEvent e) -> {
             int indiceSeleccionado = listaProceso.getSelectedIndex();
-            if (indiceSeleccionado > -1) {
+            if (indiceSeleccionado > NADA_SELECCIONADO) {
                 controlador.procesoAHecho((lmProceso.size() - 1) - indiceSeleccionado);
             }
         });
 
         btnIzqHecho.addActionListener((ActionEvent e) -> {
             int indiceSeleccionado = listaHecho.getSelectedIndex();
-            if (indiceSeleccionado > -1) {
+            if (indiceSeleccionado > NADA_SELECCIONADO) {
                 controlador.hechoAProceso((lmHecho.size() - 1) - indiceSeleccionado);
             }
         });
 
         btnRemoveTarea.addActionListener((ActionEvent e) -> {
             int indice = listaTarea.getSelectedIndex();
-            if (indice > -1) {
+            if (indice > NADA_SELECCIONADO) {
                 controlador.eliminarTarea((lmTareas.size() - 1) - indice);
             }
         });
 
         btnRemoveProceso.addActionListener((ActionEvent e) -> {
             int indice = listaProceso.getSelectedIndex();
-            if (indice > -1) {
+            if (indice > NADA_SELECCIONADO) {
                 controlador.eliminarProceso((lmProceso.size() - 1) - indice);
             }
         });
 
         btnRemoveHecho.addActionListener((ActionEvent e) -> {
             int indice = listaHecho.getSelectedIndex();
-            if (indice > -1) {
+            if (indice > NADA_SELECCIONADO) {
                 controlador.eliminarHecho((lmHecho.size() - 1) - indice);
             }
         });
@@ -447,7 +445,7 @@ public final class VistaTareas extends Vista {
                 modeloLista = lmHecho;
                 listaActual = listaHecho;
                 lblTitulo = lblTHecho;
-                lblTitulo.setText("Hechos");
+                lblTitulo.setText(HECHOS);
                 btnSubir = btnHechoArriba;
                 btnBajar = btnHechoAbajo;
                 break;
@@ -455,7 +453,7 @@ public final class VistaTareas extends Vista {
                 modeloLista = lmProceso;
                 listaActual = listaProceso;
                 lblTitulo = lblTProceso;
-                lblTitulo.setText("En proceso");
+                lblTitulo.setText(EN_PROCESO);
                 btnSubir = btnProcesoArriba;
                 btnBajar = btnProcesoAbajo;
                 break;
@@ -463,7 +461,7 @@ public final class VistaTareas extends Vista {
                 modeloLista = lmTareas;
                 listaActual = listaTarea;
                 lblTitulo = lblTTarea;
-                lblTitulo.setText("Lista de tareas");
+                lblTitulo.setText(LISTA_TAREAS);
                 btnSubir = btnTareaArriba;
                 btnBajar = btnTareaAbajo;
                 break;

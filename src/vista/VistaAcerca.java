@@ -1,11 +1,10 @@
 package vista;
 
 import controlador.ControladorPrincipal;
-import controlador.Main;
+import static modelo.Constantes.*;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -15,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import static modelo.Diccionario.*;
 
 /**
  * Ventana que contiene informacion del proyecto.
@@ -40,7 +40,6 @@ public final class VistaAcerca extends Vista {
 
         // Propiedades de la ventana.
         super.setResizable(false);
-        super.setTitle("Task Man");
         super.definirTamanioVentana(320, 300);
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -52,17 +51,10 @@ public final class VistaAcerca extends Vista {
         pnlSur = new JPanel();
 
         lblLogo = new JLabel(imgLogo);
-        lblAcerca = new JLabel("<html><h3>Desarrollador</h3>"
-                + "<p>Carlos Aguirre</p><p></p>"
-                + "<h3>Sobre esta aplicación</h3>"
-                + "<p>Este programa permite gestionar las tareas de forma sencilla.</p>"
-                + "<p>Cada proyecto se guarda en un archivo con extension .prj dentro de la carpeta proyectos, de esta manera los puedes mover fácilmente.</p><p></p>"
-                + "<p>Si te gusta el proyecto y quieres contribuir puedes hacer un pequeño donativo haciendo click en el botón <em>Invitar a un cafe</em>.</p><p></p>"
-                + "<p>Muchas gracias por usar esta aplicación.</p>"
-                + "</html>");
+        lblAcerca = new JLabel(ACERCA);
 
-        btnCerrar = new JButton("Cerrar");
-        btnDonar = new JButton("Invitar a un café");
+        btnCerrar = new JButton(CERRAR);
+        btnDonar = new JButton(INVITAR_CAFE);
     }
 
     @Override
@@ -85,8 +77,6 @@ public final class VistaAcerca extends Vista {
 
     @Override
     protected void definirEstilos() {
-        super.setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/logo.png")));
-
         btnCerrar.setIcon(imgCerrar);
         btnDonar.setIcon(imgDonar);
 
@@ -120,7 +110,7 @@ public final class VistaAcerca extends Vista {
         btnDonar.addActionListener((ActionEvent e) -> {
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 try {
-                    Desktop.getDesktop().browse(new URI(Main.WEB_DONATIVO));
+                    Desktop.getDesktop().browse(new URI(WEB_DONATIVO));
                 } catch (Exception ex) {
                     mostrarLinkWeb();
                 }

@@ -1,8 +1,9 @@
 package controlador;
 
+import static modelo.Diccionario.*;
 import modelo.GuardarCargar;
 import modelo.Proyecto;
-import vista.Vista;
+import static modelo.Constantes.*;
 import vista.VistaTareas;
 
 /**
@@ -31,7 +32,7 @@ public final class ControlTareas {
     // ########################## GUARDAR Y CARGAR ##########################
     public void guardarTodo() {
         if (!cargarGuardar.guardarProyecto(proyectoActual)) {
-            vistaTareas.mostrarMensaje("No se ha podido guardar el proceso.", true);
+            vistaTareas.mostrarMensaje(NO_SE_PUDO_GUARDAR, true);
         }
     }
 
@@ -45,11 +46,11 @@ public final class ControlTareas {
     // ########################## ANIADIDOS ##########################
     public void addElemento(byte idElemento, String elementoNuevo) {
         switch (idElemento) {
-            case Vista.ID_HECHOS:
+            case ID_HECHOS:
                 proyectoActual.addHecho(elementoNuevo);
                 refrescarHechos(0);
                 break;
-            case Vista.ID_PROCESOS:
+            case ID_PROCESOS:
                 proyectoActual.addProceso(elementoNuevo);
                 refrescarProcesos(0);
                 break;
@@ -63,26 +64,26 @@ public final class ControlTareas {
     // ########################## MOVIMIENTOS ##########################
     public void tareaAProceso(int indice) {
         proyectoActual.addProceso(proyectoActual.removeTarea(indice));
-        refrescarTareas(Vista.INDICE_AUTO);
-        refrescarProcesos(Vista.INDICE_AUTO);
+        refrescarTareas(INDICE_AUTO);
+        refrescarProcesos(INDICE_AUTO);
     }
 
     public void procesoATarea(int indice) {
         proyectoActual.addTarea(proyectoActual.removeProceso(indice));
-        refrescarTareas(Vista.INDICE_AUTO);
-        refrescarProcesos(Vista.INDICE_AUTO);
+        refrescarTareas(INDICE_AUTO);
+        refrescarProcesos(INDICE_AUTO);
     }
 
     public void procesoAHecho(int indice) {
         proyectoActual.addHecho(proyectoActual.removeProceso(indice));
-        refrescarHechos(Vista.INDICE_AUTO);
-        refrescarProcesos(Vista.INDICE_AUTO);
+        refrescarHechos(INDICE_AUTO);
+        refrescarProcesos(INDICE_AUTO);
     }
 
     public void hechoAProceso(int indice) {
         proyectoActual.addProceso(proyectoActual.removeHecho(indice));
-        refrescarHechos(Vista.INDICE_AUTO);
-        refrescarProcesos(Vista.INDICE_AUTO);
+        refrescarHechos(INDICE_AUTO);
+        refrescarProcesos(INDICE_AUTO);
     }
 
     public void subirTarea(int indice) {
@@ -124,17 +125,17 @@ public final class ControlTareas {
     // ########################## ELIMINAR ##########################
     public void eliminarTarea(int indice) {
         proyectoActual.removeTarea(indice);
-        refrescarTareas(Vista.INDICE_AUTO);
+        refrescarTareas(INDICE_AUTO);
     }
 
     public void eliminarProceso(int indice) {
         proyectoActual.removeProceso(indice);
-        refrescarProcesos(Vista.INDICE_AUTO);
+        refrescarProcesos(INDICE_AUTO);
     }
 
     public void eliminarHecho(int indice) {
         proyectoActual.removeHecho(indice);
-        refrescarHechos(Vista.INDICE_AUTO);
+        refrescarHechos(INDICE_AUTO);
     }
 
     // ########################## CAMBIAR NOMBRE PROYECTO ##########################
@@ -144,20 +145,20 @@ public final class ControlTareas {
 
     // ########################## METODOS AUXILIARES ##########################
     private void refrescarTareas(int posicionIndice) {
-        vistaTareas.refrescarLista(Vista.ID_TAREAS, proyectoActual.getTareas(), posicionIndice);
+        vistaTareas.refrescarLista(ID_TAREAS, proyectoActual.getTareas(), posicionIndice);
     }
 
     private void refrescarProcesos(int posicionIndice) {
-        vistaTareas.refrescarLista(Vista.ID_PROCESOS, proyectoActual.getProcesos(), posicionIndice);
+        vistaTareas.refrescarLista(ID_PROCESOS, proyectoActual.getProcesos(), posicionIndice);
     }
 
     private void refrescarHechos(int posicionIndice) {
-        vistaTareas.refrescarLista(Vista.ID_HECHOS, proyectoActual.getHechos(), posicionIndice);
+        vistaTareas.refrescarLista(ID_HECHOS, proyectoActual.getHechos(), posicionIndice);
     }
 
     private void refrescarTodo() {
-        refrescarTareas(Vista.INDICE_AUTO);
-        refrescarProcesos(Vista.INDICE_AUTO);
-        refrescarHechos(Vista.INDICE_AUTO);
+        refrescarTareas(INDICE_AUTO);
+        refrescarProcesos(INDICE_AUTO);
+        refrescarHechos(INDICE_AUTO);
     }
 }

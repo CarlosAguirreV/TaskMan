@@ -3,7 +3,6 @@ package vista;
 import controlador.ControladorPrincipal;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -12,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import static modelo.Diccionario.*;
 
 /**
  * Vista principal, la cual muestra los proyectos y su estado. Esta clase no
@@ -47,7 +47,6 @@ public final class VistaPrincipal extends Vista {
 
         // Propiedades de la ventana.
         super.setResizable(false);
-        super.setTitle("Task Man");
         super.definirTamanioVentana(220, 420);
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -67,28 +66,28 @@ public final class VistaPrincipal extends Vista {
 
         cmbProyectos = new JComboBox();
 
-        btnNuevo = new JButton("Crear proyecto");
-        btnAbrir = new JButton("Abrir seleccionado");
-        btnEliminar = new JButton("Eliminar");
+        btnNuevo = new JButton(CREAR_PRJ);
+        btnAbrir = new JButton(ABRIR_SELECCIONADO);
+        btnEliminar = new JButton(ELIMINAR);
         btnAcercaDe = new JButton();
 
-        lblSelecciona = new JLabel("Selecciona un proyecto");
-        lblTituloInfo = new JLabel("Título");
-        lblNombreArchivoInfo = new JLabel("Nombre de archivo");
-        lblFechaCreacionInfo = new JLabel("Fecha de creación");
-        lblFechaModificacionInfo = new JLabel("Última modificación");
-        lblEstadoInfo = new JLabel("Estado");
-        lblTitulo = new JLabel("#");
-        lblNombreArchivo = new JLabel("#");
-        lblFechaCreacion = new JLabel("#");
-        lblFechaModificacion = new JLabel("#");
-        lblEstado = new JLabel("#");
-        lblTareasInfo = new JLabel("Tareas", SwingConstants.CENTER);
-        lblProcesosInfo = new JLabel("En proceso", SwingConstants.CENTER);
-        lblHechosInfo = new JLabel("Hechos", SwingConstants.CENTER);
-        lblTareas = new JLabel("--", SwingConstants.CENTER);
-        lblProcesos = new JLabel("--", SwingConstants.CENTER);
-        lblHechos = new JLabel("--", SwingConstants.CENTER);
+        lblSelecciona = new JLabel(SELECCIONA_PRJ);
+        lblTituloInfo = new JLabel(TITULO);
+        lblNombreArchivoInfo = new JLabel(NOMBRE_ARCHIVO);
+        lblFechaCreacionInfo = new JLabel(FECHA_CREACION);
+        lblFechaModificacionInfo = new JLabel(FECHA_MODIFICACION);
+        lblEstadoInfo = new JLabel(ESTADO);
+        lblTitulo = new JLabel(NADA);
+        lblNombreArchivo = new JLabel(NADA);
+        lblFechaCreacion = new JLabel(NADA);
+        lblFechaModificacion = new JLabel(NADA);
+        lblEstado = new JLabel(NADA);
+        lblTareasInfo = new JLabel(TAREAS, SwingConstants.CENTER);
+        lblProcesosInfo = new JLabel(EN_PROCESO, SwingConstants.CENTER);
+        lblHechosInfo = new JLabel(HECHOS, SwingConstants.CENTER);
+        lblTareas = new JLabel(NADA_DIGITO, SwingConstants.CENTER);
+        lblProcesos = new JLabel(NADA_DIGITO, SwingConstants.CENTER);
+        lblHechos = new JLabel(NADA_DIGITO, SwingConstants.CENTER);
     }
 
     @Override
@@ -143,8 +142,6 @@ public final class VistaPrincipal extends Vista {
 
     @Override
     protected void definirEstilos() {
-        super.setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/recursos/logo.png")));
-
         btnNuevo.setIcon(imgNuevo);
         btnAbrir.setIcon(imgAbrir);
         btnEliminar.setIcon(imgPapelera);
@@ -232,7 +229,7 @@ public final class VistaPrincipal extends Vista {
 
     // ########################## METODOS ##########################
     private void accionNuevoProyecto() {
-        String respuesta = pedirTexto("Nuevo proyecto", "");
+        String respuesta = pedirTexto(NUEVO_PRJ, "");
         if (respuesta != null) {
             controlador.crearProyectoNuevo(respuesta);
         }
@@ -252,7 +249,7 @@ public final class VistaPrincipal extends Vista {
                 cmbProyectos.addItem(proyecto);
             }
         } else {
-            setInfoProyecto("#", "#", "#", "#", "#", -1, -1, -1);
+            setInfoProyecto(NADA, NADA, NADA, NADA, NADA, -1, -1, -1);
         }
     }
 
@@ -271,9 +268,9 @@ public final class VistaPrincipal extends Vista {
         lblFechaCreacion.setText(fechaCreacion);
         lblFechaModificacion.setText(fechaModificacion);
         lblEstado.setText(estado);
-        lblTareas.setText(tareas == -1 ? "--" : Integer.toString(tareas));
-        lblProcesos.setText(procesos == -1 ? "--" : Integer.toString(procesos));
-        lblHechos.setText(hechos == -1 ? "--" : Integer.toString(hechos));
+        lblTareas.setText(tareas == -1 ? NADA_DIGITO : Integer.toString(tareas));
+        lblProcesos.setText(procesos == -1 ? NADA_DIGITO : Integer.toString(procesos));
+        lblHechos.setText(hechos == -1 ? NADA_DIGITO : Integer.toString(hechos));
     }
 
 }

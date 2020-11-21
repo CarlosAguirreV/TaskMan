@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import vista.Vista;
+import static modelo.Constantes.*;
+import static modelo.Diccionario.*;
 
 /**
  * Esta clase contiene los datos que se van a guardar.
@@ -125,13 +126,11 @@ public class Proyecto implements Serializable {
     public String getEstado() {
         String estado;
         if (coleccionTareas.isEmpty() && coleccionProcesos.isEmpty() && !coleccionHechos.isEmpty()) {
-            estado = "Terminado";
+            estado = ESTADO_PRJ[2];
         } else if (coleccionTareas.isEmpty() && coleccionProcesos.isEmpty() && coleccionHechos.isEmpty()) {
-            estado = "Sin empezar";
-        } else if (!coleccionTareas.isEmpty() || !coleccionProcesos.isEmpty()) {
-            estado = "En proceso";
+            estado = ESTADO_PRJ[0];
         } else {
-            estado = "Empezado";
+            estado = ESTADO_PRJ[1];
         }
 
         return estado;
@@ -169,7 +168,7 @@ public class Proyecto implements Serializable {
     }
 
     private static String getFechaActual() {
-        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+        return new SimpleDateFormat(FORMATO_FECHA_HORA).format(Calendar.getInstance().getTime());
     }
 
     private int subirElemento(int indice, ArrayList<String> coleccion) {
@@ -184,7 +183,7 @@ public class Proyecto implements Serializable {
             return indice - 1;
         }
 
-        return Vista.INDICE_AUTO;
+        return INDICE_AUTO;
     }
 
     private int bajarElemento(int indice, ArrayList<String> coleccion) {
@@ -199,7 +198,7 @@ public class Proyecto implements Serializable {
             return indice + 1;
         }
 
-        return Vista.INDICE_AUTO;
+        return INDICE_AUTO;
     }
 
     @Override
