@@ -1,4 +1,4 @@
-# TaskMan
+# Task Man
 Aplicación con la cuál se pueden gestionar las tareas de uno o varios proyectos de manera sencilla.
 
 ## 🛠️ Pre-requisitos
