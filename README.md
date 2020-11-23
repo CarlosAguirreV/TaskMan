@@ -26,7 +26,7 @@ Cada vez que entres en la ventana principal podrás hechar un vistazo rápido a 
 En otras palabras eres libre de estudiar, modificar, comercializar y distribuir este código libremente.
 
 ## ❤️ ¿Puedo contribuir de alguna forma?
-Por supuesto, puedes escribir comentarios de este archivo exponiendo lo que te gusta, lo que cambiarías y/o añadirías. Pero además puedes [☕ invitarme a un café (donativo pequeño)](https://ko-fi.com/carlosaguirrev) ya que hay que estar varias horas trabajando y necesito mantenerme despierto. Este último me permitirá seguir desarrollando y compartiendo aplicaciones útiles.</br>
+Por supuesto, puedes escribir comentarios para este archivo exponiendo lo que te gusta, lo que cambiarías y/o añadirías al proyecto. Pero además puedes [☕ invitarme a un café (donativo pequeño)](https://ko-fi.com/carlosaguirrev) ya que hay que estar varias horas trabajando y necesito mantenerme despierto. Este último me permitirá seguir desarrollando y compartiendo aplicaciones útiles.</br>
 Muchas gracias de antemano.
 
 ## 🎁 Agradecimientos
