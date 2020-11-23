@@ -72,6 +72,14 @@ public class Proyecto implements Serializable {
         return bajarElemento(indice, coleccionTareas);
     }
 
+    public void setNombreTarea(String nuevoNombre, int indice) {
+        coleccionTareas.set(indice, nuevoNombre);
+    }
+
+    public String getNombreTarea(int indice) {
+        return coleccionTareas.get(indice);
+    }
+
     // ########################## PROCESOS ##########################
     public void addProceso(String proceso) {
         coleccionProcesos.add(proceso);
@@ -97,6 +105,14 @@ public class Proyecto implements Serializable {
         return bajarElemento(indice, coleccionProcesos);
     }
 
+    public void setNombreProceso(String nuevoNombre, int indice) {
+        coleccionProcesos.set(indice, nuevoNombre);
+    }
+
+    public String getNombreProceso(int indice) {
+        return coleccionProcesos.get(indice);
+    }
+
     // ########################## HECHOS ##########################
     public void addHecho(String hecho) {
         coleccionHechos.add(hecho);
@@ -120,6 +136,14 @@ public class Proyecto implements Serializable {
 
     public int bajarHecho(int indice) {
         return bajarElemento(indice, coleccionHechos);
+    }
+
+    public void setNombreHecho(String nuevoNombre, int indice) {
+        coleccionHechos.set(indice, nuevoNombre);
+    }
+
+    public String getNombreHecho(int indice) {
+        return coleccionHechos.get(indice);
     }
 
     // ########################## OTROS METODOS ##########################

@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
@@ -318,7 +320,7 @@ public final class VistaTareas extends Vista {
         });
 
         btnEditar.addActionListener((ActionEvent e) -> {
-            String nombreNuevo = pedirTexto(EDITAR, lblTitulo.getText());
+            String nombreNuevo = pedirNuevoNombrePrj(EDITAR, lblTitulo.getText());
             if (nombreNuevo != null) {
                 controlador.setNombreProyecto(nombreNuevo);
                 lblTitulo.setText(nombreNuevo);
@@ -420,6 +422,33 @@ public final class VistaTareas extends Vista {
 
         btnHechoAbajo.addActionListener((ActionEvent e) -> {
             controlador.bajarHecho(listaHecho.getSelectedIndex());
+        });
+
+        listaTarea.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    int indice = listaTarea.getSelectedIndex();
+                    controlador.modificarTarea((lmTareas.size() - 1) - indice, indice);
+                }
+            }
+        });
+
+        listaProceso.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    int indice = listaProceso.getSelectedIndex();
+                    controlador.modificarProceso((lmProceso.size() - 1) - indice, indice);
+                }
+            }
+        });
+
+        listaHecho.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    int indice = listaHecho.getSelectedIndex();
+                    controlador.modificarHecho((lmHecho.size() - 1) - indice, indice);
+                }
+            }
         });
 
         // Al cerrar esta ventana (JFrame).

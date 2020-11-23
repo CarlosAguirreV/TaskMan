@@ -4,7 +4,7 @@ Aplicación con la cuál se pueden gestionar las tareas de uno o varios proyecto
 ## 🛠️ Pre-requisitos
 Para poder usar esta aplicación es necesario tener instalado **Java**.
 * En Windows podrás ejecutarlo de manera sencilla con solo hacer doble click en el _.jar_.
-* En Linux tendrás que emplear los comandos _java -jar ./tu_ruta/TaskMan.jar_
+* En Linux tendrás que emplear los comandos _java -jar ./tu_ruta/TaskMan.jar_ No olvides darle permisos.
 
 ## 🖇️ ¿Dónde lo puedo descargar?
 Desde la misma página de [SourceForge]().

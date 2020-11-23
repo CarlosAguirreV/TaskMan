@@ -25,7 +25,7 @@ public final class VistaAcerca extends Vista {
 
     private JPanel pnlGlobal, pnlSur;
     private JLabel lblLogo, lblAcerca;
-    private JButton btnCerrar, btnDonar;
+    private JButton btnCerrar, btnDonar, btnGitHub;
     private ControladorPrincipal controlador;
 
     public VistaAcerca(ControladorPrincipal controlador) {
@@ -40,7 +40,7 @@ public final class VistaAcerca extends Vista {
 
         // Propiedades de la ventana.
         super.setResizable(false);
-        super.definirTamanioVentana(320, 300);
+        super.definirTamanioVentana(320, 360);
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
@@ -55,12 +55,13 @@ public final class VistaAcerca extends Vista {
 
         btnCerrar = new JButton(CERRAR);
         btnDonar = new JButton(INVITAR_CAFE);
+        btnGitHub = new JButton(GIT_HUB);
     }
 
     @Override
     protected void crearDistribucion() {
         pnlGlobal.setLayout(new BorderLayout());
-        pnlSur.setLayout(new GridLayout(1, 2, 5, 0));
+        pnlSur.setLayout(new GridLayout(1, 3, 5, 0));
     }
 
     @Override
@@ -73,21 +74,26 @@ public final class VistaAcerca extends Vista {
 
         pnlSur.add(btnCerrar);
         pnlSur.add(btnDonar);
+        pnlSur.add(btnGitHub);
     }
 
     @Override
     protected void definirEstilos() {
         btnCerrar.setIcon(imgCerrar);
         btnDonar.setIcon(imgDonar);
+        btnGitHub.setIcon(imgGitHub);
 
         pnlGlobal.setBackground(COLOR_BACK);
         btnCerrar.setBackground(COLOR_CERRAR);
         btnCerrar.setForeground(COLOR_BACK);
         btnDonar.setBackground(COLOR_DONAR);
         btnDonar.setForeground(COLOR_BACK);
+        btnGitHub.setBackground(COLOR_GITHUB);
+        btnGitHub.setForeground(COLOR_BACK);
 
         btnCerrar.setFont(FUENTE_NEGRITA);
         btnDonar.setFont(FUENTE_NEGRITA);
+        btnGitHub.setFont(FUENTE_NEGRITA);
 
         lblLogo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         lblAcerca.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -97,6 +103,8 @@ public final class VistaAcerca extends Vista {
         btnCerrar.setBorderPainted(false);
         btnDonar.setFocusPainted(false);
         btnDonar.setBorderPainted(false);
+        btnGitHub.setFocusPainted(false);
+        btnGitHub.setBorderPainted(false);
 
         pnlSur.setOpaque(false);
     }
@@ -111,6 +119,16 @@ public final class VistaAcerca extends Vista {
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 try {
                     Desktop.getDesktop().browse(new URI(WEB_DONATIVO));
+                } catch (Exception ex) {
+                    mostrarLinkWeb();
+                }
+            }
+        });
+
+        btnGitHub.addActionListener((ActionEvent e) -> {
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                try {
+                    Desktop.getDesktop().browse(new URI(WEB_GITHUB));
                 } catch (Exception ex) {
                     mostrarLinkWeb();
                 }

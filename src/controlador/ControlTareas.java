@@ -122,6 +122,40 @@ public final class ControlTareas {
         }
     }
 
+    // ########################## MODIFICAR ##########################
+    public void modificarTarea(int indiceInvertido, int indiceListado) {
+        if (indiceListado != NADA_SELECCIONADO) {
+            String nombreNuevo = vistaTareas.pedirNuevoNombreElemento(proyectoActual.getNombreTarea(indiceInvertido));
+
+            if (nombreNuevo != null) {
+                proyectoActual.setNombreTarea(nombreNuevo, indiceInvertido);
+                refrescarTareas(indiceListado);
+            }
+        }
+    }
+
+    public void modificarProceso(int indiceInvertido, int indiceListado) {
+        if (indiceListado != NADA_SELECCIONADO) {
+            String nombreNuevo = vistaTareas.pedirNuevoNombreElemento(proyectoActual.getNombreProceso(indiceInvertido));
+
+            if (nombreNuevo != null) {
+                proyectoActual.setNombreProceso(nombreNuevo, indiceInvertido);
+                refrescarProcesos(indiceListado);
+            }
+        }
+    }
+
+    public void modificarHecho(int indiceInvertido, int indiceListado) {
+        if (indiceListado != NADA_SELECCIONADO) {
+            String nombreNuevo = vistaTareas.pedirNuevoNombreElemento(proyectoActual.getNombreHecho(indiceInvertido));
+
+            if (nombreNuevo != null) {
+                proyectoActual.setNombreHecho(nombreNuevo, indiceInvertido);
+                refrescarHechos(indiceListado);
+            }
+        }
+    }
+
     // ########################## ELIMINAR ##########################
     public void eliminarTarea(int indice) {
         proyectoActual.removeTarea(indice);

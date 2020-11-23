@@ -33,6 +33,7 @@ public abstract class Vista extends JFrame {
     protected static final Color COLOR_REMOVE = new Color(254, 229, 238);
     protected static final Color COLOR_BACK = new Color(254, 249, 251);
     protected static final Color COLOR_DONAR = new Color(180, 70, 0);
+    protected static final Color COLOR_GITHUB = new Color(38, 41, 46);
     protected static final Color COLOR_CERRAR = new Color(54, 2, 21);
 
     protected final ImageIcon imgPapelera = new ImageIcon(getClass().getResource("/recursos/papelera.png"));
@@ -52,6 +53,7 @@ public abstract class Vista extends JFrame {
     protected final ImageIcon imgLogo = new ImageIcon(getClass().getResource("/recursos/logo.png"));
     protected final ImageIcon imgCerrar = new ImageIcon(getClass().getResource("/recursos/cerrar.png"));
     protected final ImageIcon imgDonar = new ImageIcon(getClass().getResource("/recursos/donar.png"));
+    protected final ImageIcon imgGitHub = new ImageIcon(getClass().getResource("/recursos/github.png"));
 
     protected final ArrayList<Image> icono;
 
@@ -97,7 +99,7 @@ public abstract class Vista extends JFrame {
                 esError ? JOptionPane.ERROR_MESSAGE : JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public String pedirTexto(String titulo, String textoPorDefecto) {
+    public String pedirNuevoNombrePrj(String titulo, String textoPorDefecto) {
         Object objetoRecibido = JOptionPane.showInputDialog(this, INTRODUCE_NOMBRE_PRJ, titulo, JOptionPane.INFORMATION_MESSAGE, null, null, textoPorDefecto);
         String cadenaRecibida = null;
 
@@ -116,6 +118,24 @@ public abstract class Vista extends JFrame {
                 }
             }
 
+        }
+
+        return cadenaRecibida;
+    }
+
+    public String pedirNuevoNombreElemento(String textoAnterior) {
+        Object objetoRecibido = JOptionPane.showInputDialog(this, INTRODUCE_NOMBRE_ELEMENTO, MODIFICAR, JOptionPane.INFORMATION_MESSAGE, null, null, textoAnterior);
+        String cadenaRecibida = null;
+
+        if (objetoRecibido != null) {
+            cadenaRecibida = objetoRecibido.toString();
+
+            // Quitar espacios.
+            cadenaRecibida = cadenaRecibida.trim();
+
+            if (cadenaRecibida.isEmpty()) {
+                cadenaRecibida = null;
+            }
         }
 
         return cadenaRecibida;

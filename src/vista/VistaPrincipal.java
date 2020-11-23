@@ -229,7 +229,7 @@ public final class VistaPrincipal extends Vista {
 
     // ########################## METODOS ##########################
     private void accionNuevoProyecto() {
-        String respuesta = pedirTexto(NUEVO_PRJ, "");
+        String respuesta = pedirNuevoNombrePrj(NUEVO_PRJ, "");
         if (respuesta != null) {
             controlador.crearProyectoNuevo(respuesta);
         }

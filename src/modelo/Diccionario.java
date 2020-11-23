@@ -18,6 +18,8 @@ public interface Diccionario {
     String SEGURO_BORRAR = "¿Estas seguro de que deseas borrarlo?";
     String[] ESTADO_PRJ = {"Sin empezar", "En proceso", "Terminado"};
     String INTRODUCE_NOMBRE_PRJ = "Introduce el nombre del proyecto.\n(No debe exceder los " + LIMITE_NOMBRE + " caracteres)";
+    String INTRODUCE_NOMBRE_ELEMENTO = "Introduce el nuevo nombre del elemento.";
+    String MODIFICAR = "Modificar";
     String FALLO_NAVEGADOR = "Por algún motivo no se ha podido abrir el navegador.\nNo importa, te pongo el link aquí abajo.";
     String ACERCA = "<html><h3>Desarrollador</h3>"
             + "<p>Carlos Aguirre</p><p></p>"
@@ -43,6 +45,7 @@ public interface Diccionario {
     String FECHA_MODIFICACION = "Última modificación";
     String ESTADO = "Estado";
     String INVITAR_CAFE = "Invitar a un café";
+    String GIT_HUB = "Git Hub";
     String ABRIR_SELECCIONADO = "Abrir seleccionado";
     String TAREAS = "Tareas";
     String LISTA_TAREAS = "Lista de tareas";
