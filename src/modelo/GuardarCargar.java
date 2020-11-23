@@ -114,7 +114,7 @@ public class GuardarCargar {
 
     public boolean guardarConfiguracion(Configuracion datos) {
         boolean todoCorrecto = true;
-        archivo = new File(ARCHIVO_CONF);
+        archivo = new File(ruta, ARCHIVO_CONF);
 
         // Guardar el objeto en un archivo.
         // Al ponerlo asi se cierran automaticamente los escritores.
@@ -132,7 +132,7 @@ public class GuardarCargar {
 
     public Configuracion cargarConfiguracion() {
         Configuracion datos;
-        archivo = new File(ARCHIVO_CONF);
+        archivo = new File(ruta, ARCHIVO_CONF);
 
         try (FileInputStream archivoEntrada = new FileInputStream(archivo);
                 ObjectInputStream lectorObj = new ObjectInputStream(archivoEntrada);) {
