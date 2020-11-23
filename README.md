@@ -7,12 +7,13 @@ Para poder usar esta aplicación es necesario tener instalado **Java**.
 * En Linux tendrás que emplear los comandos _java -jar ./tu_ruta/TaskMan.jar_ No olvides darle permisos.
 
 ## 🖇️ ¿Dónde lo puedo descargar?
-Desde la misma página de [SourceForge]().
+Desde la misma página de [SourceForge](https://sourceforge.net/projects/taskman-software/).
 
 ## 📖 ¿Cómo funciona?
 Tan solo tienes que crear un proyecto y añadir las tareas.
 Después según las vayas haciendo o terminando muévelas entre las columnas _En proceso_ y _Terminado_.</br>
 Para guardar los cambios tan solo tienes que cerrar la ventana o volver a la ventana principal, es así de facil.</br>
+Para poder modificar un elemento tan solo haz doble click sobre el.</br>
 Cada vez que entres en la ventana principal podrás hechar un vistazo rápido a las tareas que te faltan por hacer, las que están en proceso y las que están hechas.
 
 ## ✒️ Autores
