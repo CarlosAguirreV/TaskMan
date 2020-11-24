@@ -120,7 +120,7 @@ public final class VistaAcerca extends Vista {
                 try {
                     Desktop.getDesktop().browse(new URI(WEB_DONATIVO));
                 } catch (Exception ex) {
-                    mostrarLinkWeb();
+                    mostrarLinkWeb(WEB_DONATIVO);
                 }
             }
         });
@@ -130,7 +130,7 @@ public final class VistaAcerca extends Vista {
                 try {
                     Desktop.getDesktop().browse(new URI(WEB_GITHUB));
                 } catch (Exception ex) {
-                    mostrarLinkWeb();
+                    mostrarLinkWeb(WEB_GITHUB);
                 }
             }
         });

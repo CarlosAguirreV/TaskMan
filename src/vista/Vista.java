@@ -141,8 +141,8 @@ public abstract class Vista extends JFrame {
         return cadenaRecibida;
     }
 
-    public void mostrarLinkWeb() {
-        JOptionPane.showInputDialog(this, FALLO_NAVEGADOR, DONATIVO, JOptionPane.INFORMATION_MESSAGE, null, null, WEB_DONATIVO);
+    public void mostrarLinkWeb(String url) {
+        JOptionPane.showInputDialog(this, FALLO_NAVEGADOR, DONATIVO, JOptionPane.INFORMATION_MESSAGE, null, null, url);
     }
 
     public boolean preguntaSeguridad(String mensaje) {
