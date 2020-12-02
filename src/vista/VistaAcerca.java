@@ -26,7 +26,7 @@ public final class VistaAcerca extends Vista {
     private JPanel pnlGlobal, pnlSur;
     private JLabel lblLogo, lblAcerca;
     private JButton btnCerrar, btnDonar, btnGitHub;
-    private ControladorPrincipal controlador;
+    private final ControladorPrincipal controlador;
 
     public VistaAcerca(ControladorPrincipal controlador) {
         this.controlador = controlador;
@@ -40,7 +40,7 @@ public final class VistaAcerca extends Vista {
 
         // Propiedades de la ventana.
         super.setResizable(false);
-        super.definirTamanioVentana(320, 360);
+        super.definirTamanioVentana(360, 360);
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
@@ -120,7 +120,7 @@ public final class VistaAcerca extends Vista {
                 try {
                     Desktop.getDesktop().browse(new URI(WEB_DONATIVO));
                 } catch (Exception ex) {
-                    mostrarLinkWeb(WEB_DONATIVO);
+                    mostrarLinkWeb(DONATIVO, WEB_DONATIVO);
                 }
             }
         });
@@ -130,7 +130,7 @@ public final class VistaAcerca extends Vista {
                 try {
                     Desktop.getDesktop().browse(new URI(WEB_GITHUB));
                 } catch (Exception ex) {
-                    mostrarLinkWeb(WEB_GITHUB);
+                    mostrarLinkWeb(GIT_HUB, WEB_GITHUB);
                 }
             }
         });

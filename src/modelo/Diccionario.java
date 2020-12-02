@@ -21,7 +21,10 @@ public interface Diccionario {
     String INTRODUCE_NOMBRE_ELEMENTO = "Introduce el nuevo nombre del elemento.";
     String MODIFICAR = "Modificar";
     String FALLO_NAVEGADOR = "Por algún motivo no se ha podido abrir el navegador.\nNo importa, te pongo el link aquí abajo.";
-    String ACERCA = "<html><h3>Desarrollador</h3>"
+    String ACERCA = "<html>"
+            + "<h3>" + NOMBRE_APLICACION + "</h3>"
+            + "<p>Task Man</p><p></p>"
+            + "<h3>Desarrollador</h3>"
             + "<p>Carlos Aguirre</p><p></p>"
             + "<h3>Sobre esta aplicación</h3>"
             + "<p>Versión: " + VERSION + "</p>"
