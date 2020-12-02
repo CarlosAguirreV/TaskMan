@@ -8,7 +8,6 @@ Para poder usar esta aplicación es necesario tener instalado **Java**.
 
 ## 🖇️ Descarga
 [![Download Task Man](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/taskman-software/files/latest/download)
-[![Download Task Man](https://img.shields.io/sourceforge/dt/taskman-software.svg)](https://sourceforge.net/projects/taskman-software/files/latest/download)
 
 ## 📖 ¿Cómo funciona?
 Tan solo tienes que crear un proyecto y añadir las tareas.

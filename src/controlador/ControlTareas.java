@@ -175,6 +175,7 @@ public final class ControlTareas {
     // ########################## CAMBIAR NOMBRE PROYECTO ##########################
     public void setNombreProyecto(String nuevoNombre) {
         proyectoActual.setNombreProyecto(nuevoNombre);
+        controladorPrincipal.nombreProyectoCambiado(proyectoActual.getNombreProyecto());
     }
 
     // ########################## METODOS AUXILIARES ##########################

@@ -110,6 +110,11 @@ public final class ControladorPrincipal {
         }
     }
 
+    public void nombreProyectoCambiado(String nuevoNombre) {
+        configuracion.setNombreUltimoProyectoAbierto(nuevoNombre);
+        guardarConfiguracion();
+    }
+
     private int getIndiceProyecto(String nombre) {
         if (nombre != null) {
             int i = 0;
