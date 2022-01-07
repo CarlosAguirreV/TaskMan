@@ -7,8 +7,7 @@ package modelo;
  */
 public interface Constantes {
 
-    public static final String VERSION = "20-12-2021";
-    public static final String WEB_DONATIVO = "https://ko-fi.com/carlosaguirrev";
+    public static final String VERSION = "01-12-2022";
     public static final String WEB_GITHUB = "https://github.com/CarlosAguirreV/TaskMan.git";
     public static final String ARCHIVO_CONF = "configuracion.conf";
     public static final String EXTENSION = "prj";

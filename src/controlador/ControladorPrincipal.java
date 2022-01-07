@@ -54,7 +54,7 @@ public final class ControladorPrincipal {
 
     public void crearProyectoNuevo(String nombre) {
         if (existeProyecto(nombre)) {
-            vistaPrincipal.mostrarMensaje(YA_EXISTE_PROYECTO, true);
+            vistaPrincipal.mostrarMensaje(YA_EXISTE_ARCHIVO, true);
         } else {
             proyectoActual = new Proyecto(nombre);
 

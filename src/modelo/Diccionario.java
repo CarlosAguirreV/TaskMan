@@ -10,7 +10,7 @@ import static modelo.Constantes.*;
 public interface Diccionario {
 
     String NOMBRE_APLICACION = "Task Man";
-    String YA_EXISTE_PROYECTO = "Ya existe un proyecto con ese nombre, usa otro.";
+    String YA_EXISTE_ARCHIVO = "Ya existe un archivo con ese nombre, usa otro.";
     String NO_SE_PUDO_GUARDAR = "No se ha podido guardar el proceso.";
     String NO_SE_PUDO_GUARDAR_PRJ = "No se ha podido guardar el nuevo proyecto.";
     String NO_SE_PUDO_GUARDAR_CONF = "No se pudo guardar la configuracion.";
@@ -28,11 +28,9 @@ public interface Diccionario {
             + "<h3>Sobre esta aplicación</h3>"
             + "<p>Versión: " + VERSION + "</p>"
             + "<p>Este programa permite gestionar las tareas de forma sencilla.</p>"
-            + "<p>Cada proyecto se guarda en un archivo con extension ." + EXTENSION + " dentro de la carpeta proyectos, de esta manera los puedes mover fácilmente.</p><p></p>"
-            + "<p>Si te gusta el proyecto y quieres contribuir puedes hacer un pequeño donativo haciendo click en el botón <em>Invitar a un cafe</em>.</p><p></p>"
+            + "<p>Cada proyecto se guarda en un archivo con extension ." + EXTENSION + " dentro de la carpeta proyectos, en <mark>" + System.getProperty("user.dir") + "</mark> de su equipo. De esta manera los puedes mover fácilmente.</p><p></p>"
             + "<p>Muchas gracias por usar esta aplicación.</p>"
             + "</html>";
-    String DONATIVO = "Donativo";
     String CONFIRMAR = "Confirmar";
     String CREAR_PRJ = "Crear proyecto";
     String NUEVO_PRJ = "Nuevo proyecto";
@@ -46,7 +44,6 @@ public interface Diccionario {
     String FECHA_CREACION = "Fecha de creación";
     String FECHA_MODIFICACION = "Última modificación";
     String ESTADO = "Estado";
-    String INVITAR_CAFE = "Invitar a un café";
     String GIT_HUB = "Git Hub";
     String ABRIR_SELECCIONADO = "Abrir seleccionado";
     String TAREAS = "Tareas";

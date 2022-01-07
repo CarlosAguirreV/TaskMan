@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import static modelo.Constantes.RUTA;
 import static modelo.Diccionario.*;
 
 /**

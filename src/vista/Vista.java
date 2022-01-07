@@ -52,7 +52,6 @@ public abstract class Vista extends JFrame {
     protected final ImageIcon imgAbajo = new ImageIcon(getClass().getResource("/recursos/abajo.png"));
     protected final ImageIcon imgLogo = new ImageIcon(getClass().getResource("/recursos/logo.png"));
     protected final ImageIcon imgCerrar = new ImageIcon(getClass().getResource("/recursos/cerrar.png"));
-    protected final ImageIcon imgDonar = new ImageIcon(getClass().getResource("/recursos/donar.png"));
     protected final ImageIcon imgGitHub = new ImageIcon(getClass().getResource("/recursos/github.png"));
 
     protected final ArrayList<Image> icono;

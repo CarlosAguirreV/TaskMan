@@ -25,7 +25,7 @@ public final class VistaAcerca extends Vista {
 
     private JPanel pnlGlobal, pnlSur;
     private JLabel lblLogo, lblAcerca;
-    private JButton btnCerrar, btnDonar, btnGitHub;
+    private JButton btnCerrar, btnGitHub;
     private final ControladorPrincipal controlador;
 
     public VistaAcerca(ControladorPrincipal controlador) {
@@ -52,9 +52,7 @@ public final class VistaAcerca extends Vista {
 
         lblLogo = new JLabel(imgLogo);
         lblAcerca = new JLabel(ACERCA);
-
         btnCerrar = new JButton(CERRAR);
-        btnDonar = new JButton(INVITAR_CAFE);
         btnGitHub = new JButton(GIT_HUB);
     }
 
@@ -73,26 +71,21 @@ public final class VistaAcerca extends Vista {
         pnlGlobal.add(pnlSur, BorderLayout.SOUTH);
 
         pnlSur.add(btnCerrar);
-        pnlSur.add(btnDonar);
         pnlSur.add(btnGitHub);
     }
 
     @Override
     protected void definirEstilos() {
         btnCerrar.setIcon(imgCerrar);
-        btnDonar.setIcon(imgDonar);
         btnGitHub.setIcon(imgGitHub);
 
         pnlGlobal.setBackground(COLOR_BACK);
         btnCerrar.setBackground(COLOR_CERRAR);
         btnCerrar.setForeground(COLOR_BACK);
-        btnDonar.setBackground(COLOR_DONAR);
-        btnDonar.setForeground(COLOR_BACK);
         btnGitHub.setBackground(COLOR_GITHUB);
         btnGitHub.setForeground(COLOR_BACK);
 
         btnCerrar.setFont(FUENTE_NEGRITA);
-        btnDonar.setFont(FUENTE_NEGRITA);
         btnGitHub.setFont(FUENTE_NEGRITA);
 
         lblLogo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -101,8 +94,6 @@ public final class VistaAcerca extends Vista {
 
         btnCerrar.setFocusPainted(false);
         btnCerrar.setBorderPainted(false);
-        btnDonar.setFocusPainted(false);
-        btnDonar.setBorderPainted(false);
         btnGitHub.setFocusPainted(false);
         btnGitHub.setBorderPainted(false);
 
@@ -113,16 +104,6 @@ public final class VistaAcerca extends Vista {
     protected void eventos() {
         btnCerrar.addActionListener((ActionEvent e) -> {
             controlador.mostrarVistaAcerca(false);
-        });
-
-        btnDonar.addActionListener((ActionEvent e) -> {
-            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                try {
-                    Desktop.getDesktop().browse(new URI(WEB_DONATIVO));
-                } catch (Exception ex) {
-                    mostrarLinkWeb(DONATIVO, WEB_DONATIVO);
-                }
-            }
         });
 
         btnGitHub.addActionListener((ActionEvent e) -> {
